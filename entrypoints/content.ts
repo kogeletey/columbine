@@ -1,7 +1,7 @@
 import { defineContentScript } from "wxt/sandbox";
 
 export default defineContentScript({
-    matches: ['*://*.google.com/*'],
+    matches: ['*://*.ofs.pub/*'],
     main() {
         console.log('Hello content.');
     },
