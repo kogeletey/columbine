@@ -1,5 +1,3 @@
-import { defineBackground } from "wxt/sandbox";
+import { defineBackground } from "wxt/sandbox"
 
-export default defineBackground(() => {
-    console.log('Hello background!', { id: browser.runtime.id });
-});
+export default defineBackground(() => { })
