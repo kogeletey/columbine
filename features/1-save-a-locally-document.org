@@ -6,8 +6,7 @@ Now you can only edit the documents and there is now way to return to them after
 
 * Suggest a solution
 
-There is a documentation on the use of a special storage wxt.
-[[https://wxt.dev/storage.html][WXT Storage]]
+There is a documentation on the use of a special [[https://wxt.dev/storage.html][WXT Storage]]
 
 Using it, create in indexdb storage and put documents there.
 When you open browser, from storage we take data and show
