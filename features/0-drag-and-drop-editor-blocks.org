@@ -1,0 +1,17 @@
+#+TITLE: Drag and drop editor blocks
+
+* Explain the problem as you see it
+
+Now of users don't possible moved blocks, just clamping with mouse.
+This will be easy to endure blocks over a long distance.
+
+* Suggest a solution
+I propose using projects [[https://sourcegraph.com/github.com/marcantondahmen/automad/-/blob/automad/src/client/admin/editor/plugins/DragDrop.ts][automad]]
+
+This is already an extension, it remains only to introduce
+
+* Release
+  DEADLINE: <2025-04-06 Sun>
+
+
+

@@ -6,12 +6,18 @@ const editor = new EditorJS({
 })
 
 export async function saveData(): Promise<void> {
-  editor.save().then(async (outputData) => {
-    await storage.setItem("local:editordata", JSON.stringify(outputData.blocks))
-  }).catch((error) => {
-    console.error("Error with server", error)
-    throw error
-  })
+  editor
+    .save()
+    .then(async (outputData) => {
+      await storage.setItem(
+        "local:editordata",
+        JSON.stringify(outputData.blocks),
+      )
+    })
+    .catch((error) => {
+      console.error("Error with server", error)
+      throw error
+    })
 }
 
 const saveButton = document.querySelector("button.save-document")
