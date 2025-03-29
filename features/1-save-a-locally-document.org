@@ -12,9 +12,10 @@ There is a documentation on the use of a special storage wxt.
 Using it, create in indexdb storage and put documents there.
 When you open browser, from storage we take data and show
 If user is a some docs, then it should be possible showing it in tree files view, by analogy with
-  [[./2-file-tree.jpg]].
 
-  Two more features, which must be implemented:
+[[./2-file-tree.jpg]]
+
+Two more features, which must be implemented:
 
 ** Folders and switching between them, as in realized in [[https://sourcegraph.com/search][Sourcegraph]]
 ** Filter files, as a [[https://chat.qwen.ai][qwen.chat]]

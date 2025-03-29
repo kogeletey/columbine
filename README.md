@@ -1,6 +1,6 @@
 # Columbine
 
-Creating a platform for brainly documents. Dream and realize very powerful ideas.
+Creating a platform for brainly documents. Dream and realize your powerful ideas on the one place.
 
 ## Feature list
 
