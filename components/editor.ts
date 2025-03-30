@@ -1,32 +1,81 @@
+import type { OutputData } from "@editorjs/editorjs"
 import EditorJS from "@editorjs/editorjs"
+
 import { storage } from "@wxt-dev/storage"
 
-const editor = new EditorJS({
-  holder: "alemufu",
-})
+class EditorManager {
+  constructor() {
+    this.editor = null
+  }
 
-export async function saveData(): Promise<void> {
-  editor
-    .save()
-    .then(async (outputData) => {
-      await storage.setItem(
-        "local:editordata",
-        JSON.stringify(outputData.blocks),
-      )
+  async getData(): Promise<OutputData | undefined> {
+    try {
+      const value = await storage.getItem("local:editordata")
+      return JSON.parse(value)
+    }
+    catch (error) {
+      console.error("Failed to get data", error)
+      return undefined
+    }
+  }
+
+  async initializeEditor() {
+    const initialData = await this.getData()
+    this.editor = new EditorJS({
+      holder: "alemufu",
+      data: initialData,
     })
-    .catch((error) => {
-      console.error("Error with server", error)
+  }
+
+  async saveData() {
+    try {
+      const outputData = await this.editor?.save()
+      await storage.setItem("local:editordata", JSON.stringify(outputData))
+    }
+    catch (error) {
+      console.error("Error saving data", error)
       throw error
-    })
+    }
+  }
+
+  async handleGetDataButtonClick() {
+    try {
+      const val = await this.getData()
+      console.log("get-a-data-vl", val)
+    }
+    catch (error) {
+      console.error("Failed to fetch data", error)
+    }
+  }
+
+  async handleSaveButtonClick() {
+    try {
+      await this.saveData()
+    }
+    catch (error) {
+      console.error("Failed to save data", error)
+    }
+  }
+
+  attachEventListeners() {
+    const getDataButton = document.querySelector("button.get-data")
+    if (getDataButton) {
+      getDataButton.addEventListener("click", () => this.handleGetDataButtonClick())
+    }
+
+    const saveButton = document.querySelector("button.save-document")
+    if (saveButton) {
+      saveButton.addEventListener("click", () => this.handleSaveButtonClick())
+    }
+  }
+
+  async initialize() {
+    await this.initializeEditor()
+    this.attachEventListeners()
+  }
 }
 
-const saveButton = document.querySelector("button.save-document")
-const getDataButton = document.querySelector("button.get-data")
-
-saveButton?.addEventListener("click", async () => {
-  await saveData()
-})
-
-getDataButton?.addEventListener("click", async () => {
-  // const value = await storage.getItem("local:editordata")
-})
+(async () => {
+  const editorManager = new EditorManager()
+  await editorManager.initialize()
+})()
