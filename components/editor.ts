@@ -1,81 +1,89 @@
 import type { OutputData } from "@editorjs/editorjs"
-import EditorJS from "@editorjs/editorjs"
 
+import EditorJS from "@editorjs/editorjs"
 import { storage } from "@wxt-dev/storage"
 
-class EditorManager {
-  constructor() {
-    this.editor = null
-  }
+import DragDrop from "editorjs-drag-drop"
 
-  async getData(): Promise<OutputData | undefined> {
-    try {
-      const value = await storage.getItem("local:editordata")
-      return JSON.parse(value)
-    }
-    catch (error) {
-      console.error("Failed to get data", error)
-      return undefined
-    }
-  }
+export class EditorJSComponent {
+    static tag = "alemufu"
+    editor: EditorJS | null
 
-  async initializeEditor() {
-    const initialData = await this.getData()
-    this.editor = new EditorJS({
-      holder: "alemufu",
-      data: initialData,
-    })
-  }
-
-  async saveData() {
-    try {
-      const outputData = await this.editor?.save()
-      await storage.setItem("local:editordata", JSON.stringify(outputData))
-    }
-    catch (error) {
-      console.error("Error saving data", error)
-      throw error
-    }
-  }
-
-  async handleGetDataButtonClick() {
-    try {
-      const val = await this.getData()
-      console.log("get-a-data-vl", val)
-    }
-    catch (error) {
-      console.error("Failed to fetch data", error)
-    }
-  }
-
-  async handleSaveButtonClick() {
-    try {
-      await this.saveData()
-    }
-    catch (error) {
-      console.error("Failed to save data", error)
-    }
-  }
-
-  attachEventListeners() {
-    const getDataButton = document.querySelector("button.get-data")
-    if (getDataButton) {
-      getDataButton.addEventListener("click", () => this.handleGetDataButtonClick())
+    constructor() {
+        this.editor = null
     }
 
-    const saveButton = document.querySelector("button.save-document")
-    if (saveButton) {
-      saveButton.addEventListener("click", () => this.handleSaveButtonClick())
+    async getData(): Promise<OutputData | undefined> {
+        try {
+            const value = await storage.getItem("local:editordata")
+            return JSON.parse(value)
+        }
+        catch (error) {
+            console.error("Failed to get data", error)
+            return undefined
+        }
     }
-  }
 
-  async initialize() {
-    await this.initializeEditor()
-    this.attachEventListeners()
-  }
+    async initializeEditor() {
+        const initialData = await this.getData()
+        this.editor = new EditorJS({
+            holder: EditorJSComponent.tag,
+            data: initialData,
+            onReady: async () => {
+                new DragDrop(this.editor)
+            },
+        })
+    }
+
+    async saveData() {
+        try {
+            const outputData = await this.editor?.save()
+            await storage.setItem("local:editordata", JSON.stringify(outputData))
+        }
+        catch (error) {
+            console.error("Error saving data", error)
+            throw error
+        }
+    }
+
+    async handleGetDataButtonClick() {
+        try {
+            const val = await this.getData()
+            console.log("get-a-data-vl", val)
+        }
+        catch (error) {
+            console.error("Failed to fetch data", error)
+        }
+    }
+
+    async handleSaveButtonClick() {
+        try {
+            await this.saveData()
+        }
+        catch (error) {
+            console.error("Failed to save data", error)
+        }
+    }
+
+    attachEventListeners() {
+        const getDataButton = document.querySelector("button.get-data")
+        if (getDataButton) {
+            getDataButton.addEventListener("click", () => this.handleGetDataButtonClick())
+        }
+
+        const saveButton = document.querySelector("button.save-document")
+        if (saveButton) {
+            saveButton.addEventListener("click", () => this.handleSaveButtonClick())
+        }
+    }
+
+    async initialize() {
+        await this.initializeEditor()
+        this.attachEventListeners()
+    }
 }
 
 (async () => {
-  const editorManager = new EditorManager()
-  await editorManager.initialize()
+    const editorManager = new EditorJSComponent()
+    await editorManager.initialize()
 })()

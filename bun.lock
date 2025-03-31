@@ -9,6 +9,7 @@
       "devDependencies": {
         "@antfu/eslint-config": "^4.10.2",
         "@types/chrome": "^0.0.280",
+        "editorjs-drag-drop": "^1.1.16",
         "eslint": "^9.23.0",
         "typescript": "^5.6.3",
         "wxt": "^0.19.29",
@@ -499,6 +500,8 @@
     "dtrace-provider": ["dtrace-provider@0.8.8", "", { "dependencies": { "nan": "^2.14.0" } }, "sha512-b7Z7cNtHPhH9EJhNNbbeqTcXB8LGFFZhq1PGgEvpeHlzd36bhbdTWoE/Ba/YguqpBSlAPKnARWhVlhunCMwfxg=="],
 
     "eastasianwidth": ["eastasianwidth@0.2.0", "", {}, "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="],
+
+    "editorjs-drag-drop": ["editorjs-drag-drop@1.1.16", "", {}, "sha512-yOyKZqqZepkdbDQbAw1bZr3mQewkT4a9QgufWW3Aoy1qcTka8uHR01T/dGHqrpyYrF56ykyidPyp0LX79LEHHQ=="],
 
     "electron-to-chromium": ["electron-to-chromium@1.5.123", "", {}, "sha512-refir3NlutEZqlKaBLK0tzlVLe5P2wDKS7UQt/3SpibizgsRAPOsqQC3ffw1nlv3ze5gjRQZYHoPymgVZkplFA=="],
 
