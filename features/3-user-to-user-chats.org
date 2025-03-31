@@ -1,4 +1,5 @@
 #+TITLE: User-to-User Chats or Threads
+#+author: Konrad Geletey (matrix:@kglt:re128.org)
 
 * Explain the problem as you see it
 
