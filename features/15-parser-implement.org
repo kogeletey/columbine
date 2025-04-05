@@ -1,0 +1,19 @@
+#+title: Parser implement/Main service
+
+* Explain the problem as you see it
+
+The main service serves main requests from frontend application 
+1)Search by address smartContract and returns the safety index and mistakes info in contract code
+2)change tokens to usdt or tron(or other safe currency) by touching 'withdraw' button
+3)writes recent queries in memory database
+4)send request to ml proxy to start analyzing
+5)api for watch service
+
+* Suggest a solution
+
+TronWebLib to get contract by address
+JustSwap for fastSwap
+in-memory database - Typesense
+
+* Release
+  DEADLINE: <2025-04-12 Sat>

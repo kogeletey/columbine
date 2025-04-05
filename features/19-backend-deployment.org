@@ -1,0 +1,11 @@
+#+title: backend-deployment
+
+* Explain the problem as you see it
+Deploy application 
+
+* Suggest a solution
+
+1)it might be virtual machine, or special hosting.
+
+* Release
+  DEADLINE: <2025-04-26 Sat>

@@ -1,0 +1,15 @@
+#+title: Sync-service
+
+* Explain the problem as you see it
+
+Main features
+1)it might be virtual machine, or special hosting.
+2)authentication and authorization of user
+3)User settings controll, store, modify
+
+* Suggest a solution
+
+TronWeb for autherization
+
+* Release
+  DEADLINE: <2025-04-19 Sat>

@@ -1,0 +1,13 @@
+#+title: Watch service
+
+* Explain the problem as you see it
+
+Service which finds out some statistic about contract. For example MarketCap, Index of fear and etc. Also finds out the changes of contract by time and get analytics from ml model
+
+* Suggest a solution
+
+1)apis of popular markets or trading services
+2)the graph or subsquid for indicating changes in contract
+
+* Release
+  DEADLINE: <2025-04-19 Sat>

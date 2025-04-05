@@ -21,11 +21,10 @@ Creating a platform for brainly documents. Dream and realize your powerful ideas
 | [Deploy as a website](./features/12-deploy-as-a-website.org)                      | planned  | frontend,ops | 2025/04/26   |
 | [Withdraw button](./features/13-withdraw-button.org)                              | planned  | frontend     | 2025/04/26   |
 | [SQL queries](./features/14-sql-queries.org)                                      | planned  | frontend     | 2025/04/26   |
-| [Parser implement](./features/15-parser-implement.org)                            | planned  | backend      | 2025/04/12   |
-| [Search service](./features/16-search-service.org)                                | planned  | backend      | 2025/04/12   |
+| [Parser implement/Main service](./features/15-parser-implement.org)               | planned  | backend      | 2025/04/12   |
 | [Watch service](./features/16-watch-service.org)                                  | planned  | backend      | 2025/04/12   |
 | [Analytics service](./features/18-analytics-service.org)                          | planned  | backend,ml   | 2025/04/19   |
-| [Cloud sync server](./features/23-sync-server.org)                                | planned  | backend      | 2025/05/19   |
+| [Sync(User) service](./features/23-sync-server.org)                               | planned  | backend      | 2025/05/19   |
 | [Backend deployment](./features/19-backend-deployment.org)                        | planned  | backend,ops  | 2025/04/26   |
 | [Logical Errors detector](./features/20-logical-errors-detector.org)              | planned  | ml           | 2025/04/12   |
 | [Integrate assistant for tips](./features/21-integrate-assistant.org)             | planned  | ml           | 2025/04/19   |

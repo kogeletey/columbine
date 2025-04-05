@@ -1,0 +1,12 @@
+#+title: Watch service
+
+* Explain the problem as you see it
+The Watch service is integrated with the Telegram bot. When a user finds a contract and clicks the "Watch" button in the web client, the Telegram bot will send analytics related to that contract. Periodically, the Watch service sends requests to the Main service to check for updates in the contract and then notifies subscribers of any changes.
+
+* Suggest a solution
+
+1)telegram api
+2)schedule spring task
+
+* Release
+  DEADLINE: <2025-04-12 Sat>
