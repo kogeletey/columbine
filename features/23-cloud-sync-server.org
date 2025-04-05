@@ -1,0 +1,55 @@
+#+title: Cloud Sync Server
+#+author: Konrad Geletey (matrix:@kglt:re128.org)
+#+wip: true
+
+* Explain the problem as you see it
+
+Now all documents are maintained locally and they can be lost.
+I propose adding the opportunity to use a special synchronization server.
+
+* Suggest a solution
+
+Implement the server, using a relation database with json-b support.
+
+I propose to use schema of objects themselves from
+- [[https://codeberg.org/fediverse/fep/src/branch/main/fep/ef61/fep-ef61.md][FEP-ef61: Portable Objects]]
+
+Thereby we can increase a decentralization
+
+Using Portable Object to save a state of watch contracts, in time property, and blocks.
+
+For example:
+
+#+BEGIN_SRC js
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/data-integrity/v1",
+    "https://w3id.org/fep/ef61",
+    "https://specs.re128.org/editor-platform"
+  ]
+  type: "EditorPlatfrom",
+  "id": "ap://did:tron:{tron_address}/objects/dc505858-08ec-4a80-81dd-e6670fd8c55f",
+  "attributedTo": "ap://did:tron:{tron_address}/actor?gateways=https%3A%2F%2Fserver1.example,https%3A%2F%2Fserver2.example",
+  smartContracts: EditorJSBlocks,
+  ...EditorJSTypes
+}
+#+END_SRC
+
+** REST API
+
+Send data in editor platform
+
+#+BEGIN_SRC
+   POST /apgateway/did:tron:{tron_address}/actor/outbox
+#+END_SRC
+
+Get data from blocks
+
+#+BEGIN_SRC
+   GET /apgateway/did:tron:{tron_address}/actor/inbox
+#+END_SRC
+
+
+* Release
+  DEADLINE: <2025-04-19 Sat>

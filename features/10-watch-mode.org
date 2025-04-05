@@ -1,0 +1,15 @@
+#+title: Watch mode
+
+* Explain the problem as you see it
+
+To monitor the contract you need to have some kind of button
+
+* Suggest a solution
+
+I propose to do block with an account and a special button and place them on top of the panel.
+Like this references:
+[[./10-wordpress-follow.jpg]]
+[[./10-exclidraw-block.jpg]]
+
+* Release
+  DEADLINE: <2025-04-12 Sat>

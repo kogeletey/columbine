@@ -1,0 +1,18 @@
+#+title: Search block of Editor
+
+* Explain the problem as you see it
+
+The user needs an Input to search and filter information
+
+* Suggest a solution
+
+Propose a editor js block like at
+
+[[./4-cursor-input.jpg]]
+
+Below you can add the ability to filter according to certain characteristic and auto-suggestion with start contract on tooltip-popup.
+
+Also the arrow to send should have the opportuinity to immediately see the contract without looking into it
+
+* Release
+  DEADLINE: <2025-04-12 Sat>

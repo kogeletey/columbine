@@ -22,5 +22,3 @@ Two more features, which must be implemented:
 
 * Release
   DEADLINE: <2025-04-06 Sun>
-
-
