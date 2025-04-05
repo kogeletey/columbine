@@ -1,22 +1,16 @@
 import type { OutputData } from "@editorjs/editorjs"
 
 import EditorJS from "@editorjs/editorjs"
-import { storage } from "@wxt-dev/storage"
-
 import DragDrop from "editorjs-drag-drop"
 
 export class EditorJSComponent {
     static tag = "alemufu"
-    editor: EditorJS | null
-
-    constructor() {
-        this.editor = null
-    }
+    private editor?: EditorJS = undefined
 
     async getData(): Promise<OutputData | undefined> {
         try {
-            const value = await storage.getItem("local:editordata")
-            return JSON.parse(value)
+            // const value = await storage.getItem("local:editordata")
+            return JSON.parse()
         }
         catch (error) {
             console.error("Failed to get data", error)
@@ -25,12 +19,11 @@ export class EditorJSComponent {
     }
 
     async initializeEditor() {
-        const initialData = await this.getData()
+        // const initialData = await this.getData()
         this.editor = new EditorJS({
             holder: EditorJSComponent.tag,
-            data: initialData,
             onReady: async () => {
-                new DragDrop(this.editor)
+                return new DragDrop(this.editor)
             },
         })
     }
@@ -38,7 +31,7 @@ export class EditorJSComponent {
     async saveData() {
         try {
             const outputData = await this.editor?.save()
-            await storage.setItem("local:editordata", JSON.stringify(outputData))
+            // await storage.setItem("local:editordata", JSON.stringify(outputData))
         }
         catch (error) {
             console.error("Error saving data", error)
@@ -79,7 +72,7 @@ export class EditorJSComponent {
 
     async initialize() {
         await this.initializeEditor()
-        this.attachEventListeners()
+        // this.attachEventListeners()
     }
 }
 

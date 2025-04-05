@@ -1,9 +1,10 @@
 {
-  "name": "components",
-  "type": "module",
-  "private": true,
-  "dependencies": {
-    "@editorjs/editorjs": "^2.30.8",
-    "editorjs-drag-drop": "^1.1.16"
-  }
+    "name": "@columine/components",
+    "type": "module",
+    "main": "index.ts",
+    "private": true,
+    "dependencies": {
+        "@editorjs/editorjs": "^2.30.8",
+        "editorjs-drag-drop": "^1.1.16"
+    }
 }
