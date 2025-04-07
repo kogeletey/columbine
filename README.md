@@ -7,10 +7,10 @@ Creating a platform for brainly documents. Dream and realize your powerful ideas
 | Feature Name(Click to learn more)                                                 | status   | scope        | release date |
 | --------------------------------------------------------------------------------- | -------- | ------------ | ------------ |
 | [DragAndDrop Editor Blocks](./features/0-drag-and-drop-editor-blocks.org)         | complete | frontend     | 2025/04/06   |
-| [Save locally a document](./features/1-save-a-locally-document.org)               | planned  | frontend     | 2025/04/06   |
+| [Save locally a document](./features/1-save-a-locally-document.org)               | complete | frontend     | 2025/04/06   |
 | [Search Block of Editor](./features/4-search-block-editor.org)                    | planned  | frontend     | 2025/04/12   |
-| [Integrate a wallet](./features/11-integrate-a-wallet.org)                        | planned  | frontend     | 2025/04/12   |
-| [Watch Mode](./features/10-watch-mode.org)                                        | planned  | frontend     | 2025/04/12   |
+| [Integrate a wallet](./features/11-integrate-a-wallet.org)                        | in-work  | frontend     | 2025/04/12   |
+| [Watch Mode](./features/10-watch-mode.org)                                        | in-work  | frontend     | 2025/04/12   |
 | [Circular diagram for analytics](./features/5-circular-diagram-for-analytics.org) | planned  | frontend     | 2025/04/12   |
 | [Dependencies of Smart accounts](./features/9-dependency-graph.org)               | planned  | frontend     | 2025/04/19   |
 | [Table Integrate with Issues](./features/6-table-integrate-for-issues.org)        | planned  | frontend     | 2025/04/19   |

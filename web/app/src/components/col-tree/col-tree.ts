@@ -1,12 +1,12 @@
-import { css, LitElement, unsafeCSS } from "lit"
+import { LitElement, unsafeCSS } from "lit"
 import { customElement, property } from "lit/decorators.js"
-import styles from "./col-tree.css?inline"
+import colTreeStyles from "./col-tree.css?inline"
 // import styles from "./col-tree.css" with { type: "css" }
 import { ColTreeTemplate } from "./col-tree.html.ts"
 
 @customElement("col-tree")
 export class ColTree extends LitElement {
-    static styles = unsafeCSS(styles)
+    static styles = unsafeCSS(colTreeStyles)
 
     @property()
     props = [{
