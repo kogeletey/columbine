@@ -1,0 +1,17 @@
+@import url("./utils/tailwind.css");
+
+:root {
+  --green: #22c55e;
+  --black: #171717;
+  --darken: #1c1917;
+  --neutral: #404040;
+  --shadow: #262626;
+  --primary: white;
+  --accent: var(--green);
+  --secondary: #090b0c;
+}
+
+body {
+  font-family: "JetBrains Mono Variable", monospace;
+  background: var(--primary);
+}

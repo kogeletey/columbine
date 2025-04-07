@@ -1,0 +1,8 @@
+aside {
+  display: grid;
+  color: red;
+}
+
+ul {
+  list-style-type: none;
+}
