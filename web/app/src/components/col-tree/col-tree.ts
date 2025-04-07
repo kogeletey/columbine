@@ -9,14 +9,14 @@ export class ColTree extends LitElement {
     static styles = unsafeCSS(styles)
 
     @property()
-    name = "Smart Contract Name"
-
-    createRenderRoot() {
-        return this
-    }
+    props = [{
+        name: "Smart Contract Name",
+        path: "/",
+        active: false,
+    }]
 
     render() {
-        return ColTreeTemplate({ name: this.name, path: "/" })
+        return ColTreeTemplate(this.props)
     }
 }
 

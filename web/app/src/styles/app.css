@@ -1,17 +1,19 @@
 @import url("./utils/tailwind.css");
 
 :root {
-  --green: #22c55e;
+  --strong-green: #22c55e;
+  --yellow-green: #ade25d;
+  --hunter-green: #3a5743;
   --black: #171717;
   --darken: #1c1917;
   --neutral: #404040;
   --shadow: #262626;
-  --primary: white;
-  --accent: var(--green);
+  --white: white;
+  --primary: var(--hunter-green);
+  --grey-10: #f4f4f5;
   --secondary: #090b0c;
 }
 
 body {
   font-family: "JetBrains Mono Variable", monospace;
-  background: var(--primary);
 }

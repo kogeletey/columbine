@@ -1,8 +1,37 @@
 aside {
   display: grid;
-  color: red;
+  width: 15vw;
+  min-height: 100vh;
+  font-size: 15px;
+  border-right: 0.5px solid;
+  border-color: var(--shadow);
 }
 
-ul {
+aside > ul {
   list-style-type: none;
+  padding-left: 0;
+}
+
+aside > ul > li {
+  padding: 0.3rem 0.25rem;
+  &:hover {
+    background: var(--grey-10);
+    & a {
+      color: var(--black);
+    }
+  }
+}
+
+aside > ul > li > a {
+  display: grid;
+  padding-left: 1rem;
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+li[aria-selected="true"] {
+  background: var(--primary);
+  & a {
+    color: var(--white);
+  }
 }
