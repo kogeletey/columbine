@@ -8,10 +8,16 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/vue": "^5.0.9",
+    "@editorjs/editorjs": "^2.30.8",
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
     "@semantic-ui/astro-lit": "^5.1.0",
-    "@editorjs/editorjs": "^2.30.8",
+    "@tronweb3/tronwallet-abstract-adapter": "^1.1.9",
+    "@tronweb3/tronwallet-adapter-vue-hooks": "^1.0.3",
+    "@tronweb3/tronwallet-adapter-vue-ui": "^1.0.3",
+    "@tronweb3/tronwallet-adapters": "^1.2.8",
+    "astro": "^5.6.1",
     "editorjs-drag-drop": "^1.1.16",
-    "astro": "^5.6.1"
+    "vue": "^3.5.13"
   }
 }
