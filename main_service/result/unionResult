@@ -1,0 +1,239 @@
+Found 3 contract initialization patterns
+
+=== Contract Initialization at lines 1-3 ===
+00000000: PUSH1 0x80
+00000002: PUSH1 0x40
+00000004: MSTORE
+
+=== Storage Operations in this section ===
+
+SSTORE operation at lines 25-27:
+00000020: PUSH1 0x0
+00000022: PUSH1 0x3
+00000024: SSTORE
+
+SSTORE operation at lines 28-30:
+00000025: PUSH1 0x0
+00000027: PUSH1 0x4
+00000029: SSTORE
+
+No function dispatchers found in this section
+
+----------------------------------------
+
+=== Contract Initialization at lines 396-398 ===
+00000276: PUSH1 0x80
+00000278: PUSH1 0x40
+0000027a: MSTORE
+
+=== Function Dispatchers in this section ===
+
+Function selector at lines 412-415:
+000002ad: PUSH4 0x6fdde03
+000002b2: EQ
+000002b3: PUSH2 0x1a6
+000002b6: JUMPI
+
+Function selector at lines 417-420:
+000002b8: PUSH4 0x753c30c
+000002bd: EQ
+000002be: PUSH2 0x250
+000002c1: JUMPI
+
+Function selector at lines 422-425:
+000002c3: PUSH4 0x95ea7b3
+000002c8: EQ
+000002c9: PUSH2 0x2ad
+000002cc: JUMPI
+
+Function selector at lines 427-430:
+000002ce: PUSH4 0xe136b19
+000002d3: EQ
+000002d4: PUSH2 0x32c
+000002d7: JUMPI
+
+Function selector at lines 432-435:
+000002d9: PUSH4 0xecb93c0
+000002de: EQ
+000002df: PUSH2 0x375
+000002e2: JUMPI
+
+Function selector at lines 437-440:
+000002e4: PUSH4 0x18160ddd
+000002e9: EQ
+000002ea: PUSH2 0x3d2
+000002ed: JUMPI
+
+Function selector at lines 442-445:
+000002ef: PUSH4 0x23b872dd
+000002f4: EQ
+000002f5: PUSH2 0x417
+000002f8: JUMPI
+
+Function selector at lines 447-450:
+000002fa: PUSH4 0x26976e3f
+000002ff: EQ
+00000300: PUSH2 0x4b6
+00000303: JUMPI
+
+Function selector at lines 452-455:
+00000305: PUSH4 0x313ce567
+0000030a: EQ
+0000030b: PUSH2 0x527
+0000030e: JUMPI
+
+Function selector at lines 457-460:
+00000310: PUSH4 0x35390714
+00000315: EQ
+00000316: PUSH2 0x572
+00000319: JUMPI
+
+Function selector at lines 462-465:
+0000031b: PUSH4 0x3eaaf86b
+00000320: EQ
+00000321: PUSH2 0x5b7
+00000324: JUMPI
+
+Function selector at lines 467-470:
+00000326: PUSH4 0x3f4ba83a
+0000032b: EQ
+0000032c: PUSH2 0x5fc
+0000032f: JUMPI
+
+Function selector at lines 472-475:
+00000331: PUSH4 0x59bf1abe
+00000336: EQ
+00000337: PUSH2 0x62d
+0000033a: JUMPI
+
+Function selector at lines 477-480:
+0000033c: PUSH4 0x5c975abb
+00000341: EQ
+00000342: PUSH2 0x6a2
+00000345: JUMPI
+
+Function selector at lines 482-485:
+00000347: PUSH4 0x66188463
+0000034c: EQ
+0000034d: PUSH2 0x6eb
+00000350: JUMPI
+
+Function selector at lines 487-490:
+00000352: PUSH4 0x70a08231
+00000357: EQ
+00000358: PUSH2 0x76a
+0000035b: JUMPI
+
+Function selector at lines 492-495:
+0000035d: PUSH4 0x75dc7d8c
+00000362: EQ
+00000363: PUSH2 0x7db
+00000366: JUMPI
+
+Function selector at lines 497-500:
+00000368: PUSH4 0x8456cb59
+0000036d: EQ
+0000036e: PUSH2 0x836
+00000371: JUMPI
+
+Function selector at lines 502-505:
+00000373: PUSH4 0x8da5cb5b
+00000378: EQ
+00000379: PUSH2 0x867
+0000037c: JUMPI
+
+Function selector at lines 507-510:
+0000037e: PUSH4 0x95d89b41
+00000383: EQ
+00000384: PUSH2 0x8d8
+00000387: JUMPI
+
+Function selector at lines 512-515:
+00000389: PUSH4 0xa9059cbb
+0000038e: EQ
+0000038f: PUSH2 0x982
+00000392: JUMPI
+
+Function selector at lines 517-520:
+00000394: PUSH4 0xb7a3446c
+00000399: EQ
+0000039a: PUSH2 0xa01
+0000039d: JUMPI
+
+Function selector at lines 522-525:
+0000039f: PUSH4 0xc0324c77
+000003a4: EQ
+000003a5: PUSH2 0xa72
+000003a8: JUMPI
+
+Function selector at lines 527-530:
+000003aa: PUSH4 0xcc872b66
+000003af: EQ
+000003b0: PUSH2 0xac3
+000003b3: JUMPI
+
+Function selector at lines 532-535:
+000003b5: PUSH4 0xd73dd623
+000003ba: EQ
+000003bb: PUSH2 0xb0a
+000003be: JUMPI
+
+Function selector at lines 537-540:
+000003c0: PUSH4 0xdb006a75
+000003c5: EQ
+000003c6: PUSH2 0xb89
+000003c9: JUMPI
+
+Function selector at lines 542-545:
+000003cb: PUSH4 0xdd62ed3e
+000003d0: EQ
+000003d1: PUSH2 0xbd0
+000003d4: JUMPI
+
+Function selector at lines 547-550:
+000003d6: PUSH4 0xdd644f72
+000003db: EQ
+000003dc: PUSH2 0xc61
+000003df: JUMPI
+
+Function selector at lines 552-555:
+000003e1: PUSH4 0xe47d6060
+000003e6: EQ
+000003e7: PUSH2 0xca6
+000003ea: JUMPI
+
+Function selector at lines 557-560:
+000003ec: PUSH4 0xe4997dc5
+000003f1: EQ
+000003f2: PUSH2 0xd1b
+000003f5: JUMPI
+
+Function selector at lines 562-565:
+000003f7: PUSH4 0xe5b5019a
+000003fc: EQ
+000003fd: PUSH2 0xd78
+00000400: JUMPI
+
+Function selector at lines 567-570:
+00000402: PUSH4 0xf2fde38b
+00000407: EQ
+00000408: PUSH2 0xdbd
+0000040b: JUMPI
+
+Function selector at lines 572-575:
+0000040d: PUSH4 0xf3bdc228
+00000412: EQ
+00000413: PUSH2 0xe1a
+00000416: JUMPI
+
+----------------------------------------
+
+=== Contract Initialization at lines 5522-5524 ===
+0000284f: PUSH1 0x9
+00002851: PUSH1 0x20
+00002853: MSTORE
+
+No function dispatchers found in this section
+
+----------------------------------------
+
