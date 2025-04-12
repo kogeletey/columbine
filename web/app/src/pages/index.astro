@@ -2,10 +2,12 @@
 import Base from "@/layouts/base.astro"
 import { ColNav } from '@/components/col-nav/col-nav.ts'
 import TronLink from '@/components/tron-link/tron-link.vue'
+import { SuperInput } from '@/components/super-input/super-input'
 ---
 
 <Base>
-    <div id="alemufu"></div>
+    <SuperInput client:load />
+    <!-- <div id="alemufu"></div> -->
     <ColNav client:load>
         <div slot="account">
         <TronLink client:only="vue" />
@@ -20,8 +22,13 @@ import TronLink from '@/components/tron-link/tron-link.vue'
 import "@/components/editor.ts"
 </script>
 
-<style>
+<style is:global>
 div#alemufu {
     margin-top: 1rem;
+}
+
+.ce-header {
+    font-size: 25px;
+    font-weight: bold;
 }
 </style>

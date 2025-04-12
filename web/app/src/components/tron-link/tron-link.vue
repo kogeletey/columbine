@@ -5,7 +5,7 @@
     @disconnect="onDisconnect"
   >
     <WalletModalProvider>
-      <WalletActionButton> </WalletActionButton>
+      <WalletActionButton> Connect </WalletActionButton>
     </WalletModalProvider>
   </WalletProvider>
 </template>
