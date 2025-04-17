@@ -6,8 +6,8 @@ import { SuperInput } from '@/components/super-input/super-input'
 ---
 
 <Base>
-    <SuperInput client:load />
-    <!-- <div id="alemufu"></div> -->
+    <!-- <SuperInput client:load /> -->
+    <div id="alemufu"></div>
     <ColNav client:load>
         <div slot="account">
         <TronLink client:only="vue" />
@@ -30,5 +30,14 @@ div#alemufu {
 .ce-header {
     font-size: 25px;
     font-weight: bold;
+}
+
+.geckoterminal {
+    width: 100%;
+    height: 70vh;
+}
+
+.ce-block__content:has(.geckoterminal) {
+    max-width: calc(100vw - 15vw - 300px)
 }
 </style>
