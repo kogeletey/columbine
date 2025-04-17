@@ -1,0 +1,51 @@
+00002807: JUMPDEST             ; Marks a valid jump destination
+00002808: POP                  ; Clear stack (likely return value / intermediate)
+00002809: POP                  ; Clear stack
+0000280a: POP                  ; Clear stack
+0000280b: POP                  ; Clear stack
+0000280c: PUSH1 0x40           ; Push memory pointer slot (free memory pointer location)
+0000280e: MLOAD                ; Load the free memory pointer value into stack
+0000280f: RETURNDATASIZE       ; Push size of return data from external call
+00002810: PUSH1 0x20           ; Push 32 (0x20) for comparison
+00002812: DUP2                 ; Duplicate MLOAD result for comparison
+00002813: LT                   ; Check if return data size < 32 bytes
+00002814: ISZERO               ; Invert: true if return data size >= 32 bytes
+00002815: PUSH2 0x25a7         ; If true, jump to 0x25a7 (safe path)
+00002818: JUMPI                ; Conditional jump
+00002819: PUSH1 0x0            ; Else, error: push offset 0
+0000281b: DUP1                 ; Duplicate for length
+0000281c: REVERT               ; Revert with no message
+
+(bool success, bytes memory data) = someAddress.call(abi.encodeWithSignature("someFunc()"));
+require(success, "Call failed");
+require(data.length >= 32, "Invalid returndata"); 
+
+00000099: CALLER
+0000009a: PUSH1 0x2
+0000009c: PUSH1 0x0
+...
+000000d8: SSTORE
+
+require(msg.sender == owner) -- проверка
+owner = msg.sender; -- запись в переменную
+authorized[msg.sender] = true; - запись в массив
+
+
+000001e1: PUSH1 0x1f
+000001e3: LT
+000001e4: PUSH3 0x1fa
+000001e8: JUMPI
+...
+0000020d: JUMPDEST
+0000020e: DUP3
+0000020f: DUP2
+00000210: GT
+...
+0000021a: SSTORE
+...
+00000225: PUSH3 0x20d
+00000229: JUMP
+
+for (uint i = 0; i < N; i++) {
+    storage[base + i] = data[i];
+}
