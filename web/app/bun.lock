@@ -9,6 +9,8 @@
         "@editorjs/editorjs": "^2.30.8",
         "@editorjs/header": "^2.8.8",
         "@fontsource-variable/jetbrains-mono": "^5.1.1",
+        "@nanostores/lit": "^0.2.2",
+        "@nanostores/vue": "^1.0.0",
         "@semantic-ui/astro-lit": "^5.1.0",
         "@tronweb3/tronwallet-abstract-adapter": "^1.1.9",
         "@tronweb3/tronwallet-adapter-vue-hooks": "^1.0.3",
@@ -16,6 +18,7 @@
         "@tronweb3/tronwallet-adapters": "^1.2.8",
         "astro": "^5.6.1",
         "editorjs-drag-drop": "^1.1.16",
+        "nanostores": "^1.0.1",
         "vue": "^3.5.13",
       },
     },
@@ -268,6 +271,10 @@
     "@motionone/utils": ["@motionone/utils@10.18.0", "", { "dependencies": { "@motionone/types": "^10.17.1", "hey-listen": "^1.0.8", "tslib": "^2.3.1" } }, "sha512-3XVF7sgyTSI2KWvTf6uLlBJ5iAgRgmvp3bpuOiQJvInd4nZ19ET8lX5unn30SlmRH7hXbBbH+Gxd0m0klJ3Xtw=="],
 
     "@motionone/vue": ["@motionone/vue@10.16.4", "", { "dependencies": { "@motionone/dom": "^10.16.4", "tslib": "^2.3.1" } }, "sha512-z10PF9JV6SbjFq+/rYabM+8CVlMokgl8RFGvieSGNTmrkQanfHn+15XBrhG3BgUfvmTeSeyShfOHpG0i9zEdcg=="],
+
+    "@nanostores/lit": ["@nanostores/lit@0.2.2", "", { "peerDependencies": { "lit": "^2.6.0 || ^3.0.0", "nanostores": "^0.7 || ^0.8 || ^0.9 || ^0.10 || ^0.11" } }, "sha512-EK01p3rdr1z9vhWn/vLBIvkgSRvfJTjuJwl1Os1a2K73LOIQEuojREAuo+aYIThCnURQsF3oNirll0tLaeW4Dg=="],
+
+    "@nanostores/vue": ["@nanostores/vue@1.0.0", "", { "peerDependencies": { "@nanostores/logger": "^0.4.0 || ^1.0.0", "@vue/devtools-api": ">=7.6.2", "nanostores": "^0.11.3 || ^1.0.0", "vue": ">=3.3.1" }, "optionalPeers": ["@nanostores/logger", "@vue/devtools-api"] }, "sha512-+WtqBD0YXZoMmk7rjRrm0yd2F8e2O3yOk6jR3vpUREBj7UaKEEKpMrPpkpcltboL5ShlYYP0QkSwkpaMwmigOQ=="],
 
     "@noble/ciphers": ["@noble/ciphers@1.2.1", "", {}, "sha512-rONPWMC7PeExE077uLE4oqWrZ1IvAfz3oH9LibVAcVCopJiA9R62uavnbEzdkVmJYI6M6Zgkbeb07+tWjlq2XA=="],
 
@@ -1090,6 +1097,8 @@
     "multiformats": ["multiformats@9.9.0", "", {}, "sha512-HoMUjhH9T8DDBNT+6xzkrd9ga/XiBI4xLr58LJACwK6G3HTOPeMz4nB4KJs33L2BelrIJa7P0VuNaVF3hMYfjg=="],
 
     "nanoid": ["nanoid@3.3.11", "", { "bin": { "nanoid": "bin/nanoid.cjs" } }, "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="],
+
+    "nanostores": ["nanostores@1.0.1", "", {}, "sha512-kNZ9xnoJYKg/AfxjrVL4SS0fKX++4awQReGqWnwTRHxeHGZ1FJFVgTqr/eMrNQdp0Tz7M7tG/TDaX8QfHDwVCw=="],
 
     "neotraverse": ["neotraverse@0.6.18", "", {}, "sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA=="],
 
