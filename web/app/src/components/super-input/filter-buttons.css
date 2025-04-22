@@ -1,0 +1,20 @@
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  & button {
+    border: none;
+    color: var(--foreground);
+    font-size: 16px;
+    outline: 0;
+    padding: 0.25rem;
+    background-color: var(--grey-10);
+    &:hover {
+      background-color: var(--foreground);
+      color: var(--background);
+    }
+  }
+  & button.justify-end {
+    margin-left: auto;
+    padding-inline: 0.5rem;
+  }
+}
