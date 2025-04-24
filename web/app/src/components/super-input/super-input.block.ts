@@ -7,6 +7,13 @@ export class SuperInputBlock {
         this.block = block
     }
 
+
+    static get pasteConfig() {
+        return {
+            tags: ['iframe']
+        }
+    }
+
     static get toolbox() {
         return {
             title: "SuperInput",
@@ -33,5 +40,15 @@ export class SuperInputBlock {
         input.placeholder = "Search smart contract"
         // this.wrapper.setAttribute("contenteditable", "true")
         return this.wrapper
+    }
+    onPaste(event) {
+        console.log(event)
+    }
+    save(blockContent) {
+        const input = blockContent.querySelector('input')
+
+        return {
+            search: input.value
+        }
     }
 }
