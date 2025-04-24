@@ -32,12 +32,13 @@ div#alemufu {
     font-weight: bold;
 }
 
-.geckoterminal {
-    width: 100%;
-    height: 70vh;
-}
 
-.ce-block__content:has(.geckoterminal) {
-    max-width: calc(100vw - 15vw - 300px)
+section.geckoterminal {
+    & iframe {
+    width: 100%;
+    height: 60vh;
+    padding: 1.5rem;
+  }
+
 }
 </style>

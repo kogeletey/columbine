@@ -1,17 +1,20 @@
+import type { API } from "@editorjs/editorjs"
+import type {
+    BlockToolConstructorOptions,
+} from "@editorjs/editorjs/types/tools"
+
+// import { TradingViewBlock } from "@/components/trading-view/trading-view.block"
 import "@/components/super-input/filter-buttons"
+
+export type SuperInputParams = BlockToolConstructorOptions
 
 export class SuperInputBlock {
     private wrapper: HTMLElement | null
-    constructor({ block }) {
+    private api: API
+
+    constructor({ api }: SuperInputParams) {
         this.wrapper = null
-        this.block = block
-    }
-
-
-    static get pasteConfig() {
-        return {
-            tags: ['iframe']
-        }
+        this.api = api
     }
 
     static get toolbox() {
@@ -28,6 +31,14 @@ export class SuperInputBlock {
         return true
     }
 
+    getSearch(search: HTMLInputElement | null): void {
+        if (!search) {
+            return
+        }
+        const value = search.value
+        this.api.blocks.insert("tradingView", { search: value })
+    }
+
     render() {
         this.wrapper = document.createElement("fieldset")
         this.wrapper.classList.add("super")
@@ -38,17 +49,19 @@ export class SuperInputBlock {
         this.wrapper.appendChild(input)
         this.wrapper.appendChild(filterButtons)
         input.placeholder = "Search smart contract"
-        // this.wrapper.setAttribute("contenteditable", "true")
+
+        this.wrapper.addEventListener("click", () => {
+            const input = document.querySelector("input")
+            this.getSearch(input)
+        })
         return this.wrapper
     }
-    onPaste(event) {
-        console.log(event)
-    }
+
     save(blockContent) {
-        const input = blockContent.querySelector('input')
+        const input = blockContent.querySelector("input")
 
         return {
-            search: input.value
+            search: input.value,
         }
     }
 }

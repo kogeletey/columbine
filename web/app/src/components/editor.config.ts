@@ -10,7 +10,9 @@ export const editorDefineConfig: EditorConfig = {
             class: Header,
             inlineToolbar: true,
         },
-        TradingViewBlock,
+        tradingView: {
+            class: TradingViewBlock,
+        },
         SuperInputBlock,
     },
 }
