@@ -1,29 +1,10 @@
 import type { API, BlockAPI } from "@editorjs/editorjs"
-import type {
-    BlockToolConstructorOptions,
-} from "@editorjs/editorjs/types/tools"
-
-type ChartConfig = {
-    type: string
-    resolution: string
-}
-
-type InputData = {
-    unit: string
-    pools: string
-    chart: ChartConfig
-}
-
-type getData = {
-    search: string
-}
-
-export type TradingViewParams = BlockToolConstructorOptions<getData>
+import type { DataParams, InputData, TradingViewParams } from "./trading-view.d.ts"
 
 export class TradingViewBlock {
     private api: API
     private block: BlockAPI
-    private data: getData
+    private data: DataParams
 
     constructor({ api, data, block }: TradingViewParams) {
         this.api = api

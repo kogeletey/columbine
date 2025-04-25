@@ -1,32 +1,40 @@
 import type { API } from "@editorjs/editorjs"
 import type {
-    BlockToolConstructorOptions,
+  BlockToolConstructorOptions,
 } from "@editorjs/editorjs/types/tools"
 
 import * as Plot from "@observablehq/plot"
 
-export type ColPlotParams = BlockToolConstructorOptions
+type DataParams = {
+  plot: {
+    x: () => {}
+  }
+}
+export type ColPlotParams = BlockToolConstructorOptions<DataParams>
 
 export class ColPlotBlock {
-    private api: API
-    constructor({ api }: ColPlotParams) {
-        this.api = api
-    }
+  private api: API
+  private data: DataParams
 
-    static get toolbox() {
-        return {
-            title: "ColPlot",
-        }
-    }
+  constructor({ api, data }: ColPlotParams) {
+    this.api = api
+    this.data = data
+  }
 
-    createPlot() {
-        return Plot.rectY({ length: 10000 }, Plot.binX({ y: "count" }, { x: Math.random })).plot()
+  static get toolbox() {
+    return {
+      title: "ColPlot",
     }
+  }
 
-    render() {
-        const wrapper = document.createElement("section")
-        const plot = this.createPlot()
-        wrapper.append(plot)
-        return wrapper
-    }
+  createPlot() {
+    return Plot.rectY({ length: 10000 }, Plot.binX({ y: "count" }, { x: Math.random })).plot()
+  }
+
+  render() {
+    const wrapper = document.createElement("section")
+    const plot = this.createPlot()
+    wrapper.append(plot)
+    return wrapper
+  }
 }
