@@ -3,7 +3,6 @@ import type {
     BlockToolConstructorOptions,
 } from "@editorjs/editorjs/types/tools"
 
-// import { TradingViewBlock } from "@/components/trading-view/trading-view.block"
 import "@/components/super-input/filter-buttons"
 
 export type SuperInputParams = BlockToolConstructorOptions

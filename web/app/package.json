@@ -14,6 +14,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
     "@nanostores/lit": "^0.2.2",
     "@nanostores/vue": "^1.0.0",
+    "@observablehq/plot": "^0.6.17",
     "@semantic-ui/astro-lit": "^5.1.0",
     "@tronweb3/tronwallet-abstract-adapter": "^1.1.9",
     "@tronweb3/tronwallet-adapter-vue-hooks": "^1.0.3",
