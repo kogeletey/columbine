@@ -1,0 +1,38 @@
+{
+    "watch": [
+        {
+            "userId": 0,
+            "address": "TDR7rpU33hToG8qo9i676V56bzcjkpjqox",
+            "name": "SUNDOG",
+            "holders": {
+                "tron": 70,
+                "others": 20
+            },
+            "scores": {
+                "risk": "45%",
+                "logic-errors": "300"
+            },
+            "date": "2025-10-10T14:48:00Z"
+        },
+        {
+            "userId": 0,
+            "address": "TLKyq7eJ4YKbs3TGEvoBJWkAXWYQKWo2Nn",
+            "name": "BTT",
+            "holders": {
+                "tron": 15,
+                "others": 20
+            },
+            "scores": {
+                "risk": "15%",
+                "logic-errors": "10"
+            },
+            "social-sites": {
+                "x": "bittorent"
+            },
+            "date": "2025-10-10T14:48:00Z"
+        }
+    ],
+    "users": {
+        "userId": 0
+    }
+}
