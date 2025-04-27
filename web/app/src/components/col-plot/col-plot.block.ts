@@ -2,8 +2,7 @@ import type { API } from "@editorjs/editorjs"
 import type {
   BlockToolConstructorOptions,
 } from "@editorjs/editorjs/types/tools"
-
-import * as Plot from "@observablehq/plot"
+import { createPieChart } from "@/components/col-plot/creator-plots"
 
 type DataParams = {
   plot: {
@@ -27,13 +26,15 @@ export class ColPlotBlock {
     }
   }
 
-  createPlot() {
-    return Plot.rectY({ length: 10000 }, Plot.binX({ y: "count" }, { x: Math.random })).plot()
-  }
-
   render() {
     const wrapper = document.createElement("section")
-    const plot = this.createPlot()
+    const plot = createPieChart([{
+      name: "Treasure",
+      value: "100",
+    }, {
+      name: "Treasure",
+      value: "10",
+    }])
     wrapper.append(plot)
     return wrapper
   }

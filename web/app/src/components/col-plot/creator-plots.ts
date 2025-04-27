@@ -1,6 +1,11 @@
+import * as Plot from "@observablehq/plot"
 import * as d3 from "d3"
 
-function createChart(data: {
+export function createPlot() {
+  return Plot.rectY({ length: 10000 }, Plot.binX({ y: "count" }, { x: Math.random })).plot()
+}
+
+export function createPieChart(data: {
   name: string
   value: string
 }[]) {
