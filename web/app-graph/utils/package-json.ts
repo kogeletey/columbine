@@ -1,5 +1,5 @@
-import type { PackageNode } from 'node-modules-tools'
-import { normalizePkgAuthors, normalizePkgFundings, normalizePkgLicense, normalizePkgRepository } from 'node-modules-tools/utils'
+import type { PackageNode } from '../types/node'
+import { normalizePkgAuthors, normalizePkgFundings, normalizePkgLicense, normalizePkgRepository } from '../state/package-json.ts'
 
 function weakCachedFunction<T extends WeakKey, R>(fn: (arg: T) => R): (arg: T) => R {
   const cache = new WeakMap<T, R>()

@@ -1,17 +1,17 @@
-import type { PackageNode } from 'node-modules-tools'
-import type { FilterOptions } from '../../shared/filters'
+import { computed, reactive, toRaw } from 'vue'
+import type { PackageNode } from '../types/node.ts'
+import type { FilterOptions } from './filter.ts'
 import { objectMap } from '@antfu/utils'
 import { objectEntries, useDebounce } from '@vueuse/core'
-import { CLUSTER_DEP_DEV, CLUSTER_DEP_PROD } from 'node-modules-tools/constants'
-import { constructPackageFilters } from 'node-modules-tools/utils'
-import { computed, reactive, toRaw } from 'vue'
-import { FILTERS_SCHEMA } from '../../shared/filters'
+import { CLUSTER_DEP_DEV, CLUSTER_DEP_PROD } from '../types/constants.ts'
+import { constructPackageFilters } from './filter.ts'
 import { getModuleType } from '../utils/module-type'
 import { getAuthors, getPackageData } from '../utils/package-json'
 import { parseSearch } from '../utils/search-parser'
 import { rawPayload } from './data'
 
-export * from '../../shared/filters'
+import { FILTERS_SCHEMA } from './filter.ts'
+export * from './filter.ts'
 
 const FILTERS_DEFAULT: FilterOptions = Object.freeze(objectMap(FILTERS_SCHEMA, (k, v) => [k, v.default]) as FilterOptions)
 

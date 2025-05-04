@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { version } from '../../../../package.json'
-
 defineProps<{
   isLoading?: boolean
   hasError?: boolean
@@ -20,10 +18,6 @@ defineProps<{
     </div>
     <div flex="~ gap-1" leading-none text-4xl mt-5>
       <span font-700 text-primary transition-all duration-300 :class="hasError ? 'hue-rotate--105' : ''">Node Modules</span>
-      <span op75>Inspector</span>
-      <span font-mono text-sm flex="~ col items-center" mr--14>
-        <span op-fade>v{{ version }}</span>
-      </span>
     </div>
     <div op-fade text-center>
       Visualize your node_modules, inspect dependencies, and more.
