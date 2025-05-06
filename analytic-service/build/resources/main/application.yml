@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/culinary_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+server:
+  port: 8080
+
+
+telegram:
+  bot:
+    token: "8077180688:AAE5Qj37gK0cL_HZ4e3MaWnxUbvcsEmnO6k"
+    username: "Columinebot"
