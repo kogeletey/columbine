@@ -1,4 +1,4 @@
-package ru.dima.secondseminar.config;
+package ru.dima.secondseminar.telegramBot;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

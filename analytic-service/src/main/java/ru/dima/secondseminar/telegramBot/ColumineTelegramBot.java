@@ -1,4 +1,4 @@
-package ru.dima.secondseminar.config;
+package ru.dima.secondseminar.telegramBot;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.dima.secondseminar.controllers.ContractAnalyticsController;
-import ru.dima.secondseminar.controllers.TransactionAnalysisController;
 import ru.dima.secondseminar.dto.TokenStatsDTO;
 import ru.dima.secondseminar.dto.TransactionAnalysisDTO;
 
@@ -29,7 +28,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
     private String username;
 
     private final ContractAnalyticsController contractApi;
-    private final TransactionAnalysisController analysisApi;
 
     private enum BotState {
         MAIN_MENU,
@@ -178,7 +176,7 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
         }
 
         try {
-            TransactionAnalysisDTO analysis = analysisApi.getTransactionInfo(transactionHash);
+            TransactionAnalysisDTO analysis = contractApi.getTransactionInfo(transactionHash);
             String response = formatTransactionAnalysisResponse(analysis);
 
             // Split long message into parts
@@ -197,7 +195,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
             return;
         }
 
-        // Split by lines to maintain readability
         String[] lines = text.split("\n");
         StringBuilder currentMessage = new StringBuilder();
 
@@ -209,12 +206,10 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
             currentMessage.append(line).append("\n");
         }
 
-        // Send remaining content
         if (currentMessage.length() > 0) {
             sendPlainMessage(chatId, currentMessage.toString());
         }
 
-        // Send menu at the end
         sendResponseWithMenu(chatId, currentMessage.toString());
     }
 
@@ -232,7 +227,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
     private String formatTransactionAnalysisResponse(TransactionAnalysisDTO analysis) {
         StringBuilder sb = new StringBuilder();
 
-        // Basic transaction info
         sb.append("🔍 *Transaction Analysis*\n\n");
         sb.append("🆔 *Hash:* `").append(escapeMarkdown(analysis.getTransactionHash())).append("`\n");
         sb.append("⏱ *Timestamp:* ").append(analysis.getTimestamp() != null ?
@@ -240,7 +234,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
         sb.append("🧱 *Block:* ").append(analysis.getBlockNumber() != null ?
                                                 escapeMarkdown(analysis.getBlockNumber()) : "N/A").append("\n\n");
 
-        // Analysis section
         TransactionAnalysisDTO.Analysis analysisData = analysis.getAnalysis();
         sb.append("📊 *Analysis*\n");
         sb.append("┣ *Type:* ").append(analysisData.getType() != null ?
@@ -248,7 +241,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
         sb.append("┗ *Main Contract:* ").append(analysisData.getMainContract() != null ?
                                                         "`" + escapeMarkdown(analysisData.getMainContract()) + "`" : "N/A").append("\n\n");
 
-        // Call Hierarchy - only if not null
         if (analysisData.getCallHierarchy() != null && !analysisData.getCallHierarchy().isEmpty()) {
             sb.append("🌳 *Call Hierarchy*\n");
             analysisData.getCallHierarchy().forEach((hash, node) -> {
@@ -398,7 +390,6 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
             message.setText("⚠️ " + errorMessage);
             execute(message);
         } catch (TelegramApiException e) {
-            // Log this error
             e.printStackTrace();
         }
     }

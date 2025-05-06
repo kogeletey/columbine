@@ -2,6 +2,7 @@ package ru.dima.secondseminar.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,11 +20,16 @@ public class User {
     private String name;
 
     @Column(nullable = false, unique = true, length = 100)
-    private String email;
+    private String telegramId;
 
-    @Column(nullable = false, length = 255)
-    private String password;
+    @Column(nullable = false, unique = true, length = 255)
+    private String tronWallet;
 
-    @Column(columnDefinition = "TEXT")
-    private String preferences;
+    @ManyToMany
+    @JoinTable(
+            name = "user_request",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "request_id")
+    )
+    private Set<Request> requests;
 }

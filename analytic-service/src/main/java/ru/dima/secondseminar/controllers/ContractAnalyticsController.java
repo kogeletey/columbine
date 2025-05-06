@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.dima.secondseminar.dto.DappRadarDTO;
 import ru.dima.secondseminar.dto.TokenStatsDTO;
+import ru.dima.secondseminar.dto.TransactionAnalysisDTO;
 import ru.dima.secondseminar.dto.TronScanResponse;
 import ru.dima.secondseminar.dto.TronsCanTrcResponse;
 
@@ -19,20 +20,23 @@ import ru.dima.secondseminar.dto.TronsCanTrcResponse;
 public class ContractAnalyticsController {
 
     private final WebClient tronscanClient;
-
     private final WebClient dappRadarClient;
+    private final WebClient analyticServiceClient;
 
-    public ContractAnalyticsController(@Qualifier("tronscan") WebClient tronscanClient,
-                                       @Qualifier("dappRadar") WebClient dappRadarClient) {
+    public ContractAnalyticsController(
+            @Qualifier("tronscan") WebClient tronscanClient,
+            @Qualifier("dappRadar") WebClient dappRadarClient,
+            @Qualifier("anltcService") WebClient analyticServiceClient) {
         this.tronscanClient = tronscanClient;
         this.dappRadarClient = dappRadarClient;
+        this.analyticServiceClient = analyticServiceClient;
     }
 
     @GetMapping("tronscan/{tokenAddress}")
     public TokenStatsDTO getMainInfo(@PathVariable String tokenAddress) {
         TokenStatsDTO result = new TokenStatsDTO();
 
-        TronScanResponse response = tronscanClient.get()
+        TronScanResponse response1 = tronscanClient.get()
                                                   .uri(uriBuilder -> uriBuilder
                                                           .path("/contract")
                                                           .queryParam("contract", tokenAddress)
@@ -41,28 +45,31 @@ public class ContractAnalyticsController {
                                                   .bodyToMono(TronScanResponse.class)
                                                   .block();
 
-        result.setContractAddress(response.getData().get(0).getAddress());
-        result.setName(response.getData().get(0).getTokenInfo().getTokenName());
-        result.setCreationDate(Instant.ofEpochSecond(response.getData().get(0).getDateCreated()).toString());
-        result.setTokenType(response.getData().get(0).getTokenInfo().getTokenType());
-        result.setLogo(response.getData().get(0).getTokenInfo().getTokenLogo());
+        result.setContractAddress(response1.getData().get(0).getAddress());
+        result.setName(response1.getData().get(0).getTokenInfo().getTokenName());
+        result.setCreationDate(Instant.ofEpochSecond(response1.getData().get(0).getDateCreated()).toString());
+        result.setTokenType(response1.getData().get(0).getTokenInfo().getTokenType());
+        result.setLogo(response1.getData().get(0).getTokenInfo().getTokenLogo());
 
         DappRadarDTO response2 = dappRadarClient.get()
-                                                .uri(uriBuilder -> uriBuilder.path("/tron/" + tokenAddress).build())
+                                                .uri(uriBuilder -> uriBuilder
+                                                        .path("/tron/" + tokenAddress)
+                                                        .build())
                                                 .retrieve()
-                                                .bodyToMono(DappRadarDTO.class).block();
+                                                .bodyToMono(DappRadarDTO.class)
+                                                .block();
 
         result.setMarketCap(response2.getResults().getMarketCap());
 
         TronsCanTrcResponse response3 = tronscanClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/token_trc20")
-                        .queryParam("contract", tokenAddress)
-                        .queryParam("showAll", "1")
-                        .build())
-                .retrieve()
-                .bodyToMono(TronsCanTrcResponse.class)
-                .block();
+                                                      .uri(uriBuilder -> uriBuilder
+                                                              .path("/token_trc20")
+                                                              .queryParam("contract", tokenAddress)
+                                                              .queryParam("showAll", "1")
+                                                              .build())
+                                                      .retrieve()
+                                                      .bodyToMono(TronsCanTrcResponse.class)
+                                                      .block();
 
         result.setLiquidity(response3.getTrc20_tokens().get(0).getLiquidity24h());
         result.setVolume24h(response3.getTrc20_tokens().get(0).getVolume());
@@ -74,5 +81,15 @@ public class ContractAnalyticsController {
         result.setHolders(response3.getTrc20_tokens().get(0).getHolders_count());
 
         return result;
+    }
+
+    public TransactionAnalysisDTO getTransactionInfo(@PathVariable("transactionHash") String transactionHash) {
+        return analyticServiceClient.get()
+                                    .uri(uriBuilder -> uriBuilder
+                                            .path("/" + transactionHash)
+                                            .build())
+                                    .retrieve()
+                                    .bodyToMono(TransactionAnalysisDTO.class)
+                                    .block();
     }
 }
