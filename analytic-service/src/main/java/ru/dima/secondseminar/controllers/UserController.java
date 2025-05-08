@@ -97,8 +97,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getUserId")
-    public ResponseEntity<?> getUserId(
+    @GetMapping("/getUser")
+    public ResponseEntity<?> getUser(
             @RequestParam(required = false) String telegramId,
             @RequestParam(required = false) String walletAddress) {
 
