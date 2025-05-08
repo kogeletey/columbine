@@ -30,7 +30,7 @@ public class WebClientConfiguration {
     @Bean(name = "anltcService")
     public WebClient setAnalyticServiceWebClient() {
         return WebClient.builder()
-                .baseUrl("http://localhost:3000/api/analyze-transaction/")
+                .baseUrl("http://tron-analyzer:3000/api/analyze-transaction/")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

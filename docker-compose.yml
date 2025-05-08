@@ -1,0 +1,35 @@
+services:
+  tron-analyzer:
+    build:
+      context: ./tron-analyzer-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+
+  backend:
+    build:
+      context: ./analytic-service
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tron_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_DB: tron_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+# No volumes section needed anymore

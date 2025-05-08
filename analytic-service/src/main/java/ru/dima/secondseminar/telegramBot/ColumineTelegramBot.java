@@ -11,40 +11,48 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.dima.secondseminar.controllers.ContractAnalyticsController;
+import ru.dima.secondseminar.dto.RequestDTO;
 import ru.dima.secondseminar.dto.TokenStatsDTO;
 import ru.dima.secondseminar.dto.TransactionAnalysisDTO;
+import ru.dima.secondseminar.entities.User;
+import ru.dima.secondseminar.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class ColumineTelegramBot extends TelegramLongPollingBot {
 
     @Value("${telegram.bot.token}")
-    private String telegramToken;
+    private String botToken;
 
     @Value("${telegram.bot.username}")
-    private String username;
+    private String botUsername;
 
     private final ContractAnalyticsController contractApi;
+    private final UserService userService;
 
     private enum BotState {
         MAIN_MENU,
         AWAITING_CONTRACT_ADDRESS,
-        AWAITING_TRANSACTION_HASH
+        AWAITING_TRANSACTION_HASH,
+        AWAITING_NAME_FOR_REGISTRATION
     }
 
     private BotState currentState = BotState.MAIN_MENU;
+    private String pendingContractAddress;
+    private String pendingTransactionHash;
 
     @Override
     public String getBotUsername() {
-        return username;
+        return botUsername;
     }
 
     @Override
     public String getBotToken() {
-        return telegramToken;
+        return botToken;
     }
 
     @Override
@@ -55,71 +63,66 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
 
         long chatId = update.getMessage().getChatId();
         String messageText = update.getMessage().getText();
+        String telegramUsername = update.getMessage().getFrom().getUserName();
 
         try {
-            processUpdate(chatId, messageText);
-        } catch (TelegramApiException e) {
-            sendErrorMessage(chatId, "An error occurred. Please try again later.");
+            Optional<User> user = userService.findUser(telegramUsername, null);
+
+            if (user.isEmpty() && currentState != BotState.AWAITING_NAME_FOR_REGISTRATION) {
+                promptForRegistration(chatId);
+                return;
+            }
+
+            processUpdate(chatId, messageText, telegramUsername);
+        } catch (Exception e) {
+            sendErrorMessage(chatId, "❌ Error: " + e.getMessage());
         }
     }
 
-    private void processUpdate(long chatId, String messageText) throws TelegramApiException {
+    private void processUpdate(long chatId, String messageText, String telegramUsername) throws TelegramApiException {
         switch (currentState) {
-            case MAIN_MENU:
-                handleMainMenu(chatId, messageText);
-                break;
-            case AWAITING_CONTRACT_ADDRESS:
-                handleContractAddressInput(chatId, messageText);
-                break;
-            case AWAITING_TRANSACTION_HASH:
-                handleTransactionHashInput(chatId, messageText);
-                break;
+            case MAIN_MENU -> handleMainMenu(chatId, messageText, telegramUsername);
+            case AWAITING_CONTRACT_ADDRESS -> handleContractAddressInput(chatId, messageText, telegramUsername);
+            case AWAITING_TRANSACTION_HASH -> handleTransactionHashInput(chatId, messageText, telegramUsername);
+            case AWAITING_NAME_FOR_REGISTRATION -> handleUserRegistration(chatId, messageText, telegramUsername);
         }
     }
 
-    private void handleMainMenu(long chatId, String messageText) throws TelegramApiException {
-        if ("/start".equalsIgnoreCase(messageText)) {
-            sendWelcomeMessage(chatId);
-        } else if ("Get Tron Token Info".equalsIgnoreCase(messageText)) {
-            requestContractAddress(chatId);
-        } else if ("Analyze Transaction".equalsIgnoreCase(messageText)) {
-            requestTransactionHash(chatId);
-        } else {
-            sendUnknownCommandMessage(chatId);
+    private void handleMainMenu(long chatId, String messageText, String telegramUsername) throws TelegramApiException {
+        switch (messageText) {
+            case "/start" -> sendWelcomeMessage(chatId);
+            case "Get Tron Token Info" -> requestContractAddress(chatId);
+            case "Analyze Transaction" -> requestTransactionHash(chatId);
+            case "My History" -> displayUserHistory(chatId, telegramUsername);
+            default -> sendUnknownCommandMessage(chatId);
         }
     }
 
-    private void sendWelcomeMessage(long chatId) throws TelegramApiException {
+    private void promptForRegistration(long chatId) throws TelegramApiException {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
-        message.setText("Welcome to Columine Bot! \uD83D\uDE80\nWhat would you like to do?");
+        message.setText("👋 Welcome to Columine Bot!\n\n" +
+                                "Please enter your name to complete registration:");
 
-        ReplyKeyboardMarkup keyboardMarkup = createMainMenuKeyboard();
-        message.setReplyMarkup(keyboardMarkup);
-
+        currentState = BotState.AWAITING_NAME_FOR_REGISTRATION;
         execute(message);
     }
 
-    private ReplyKeyboardMarkup createMainMenuKeyboard() {
-        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-        List<KeyboardRow> keyboard = new ArrayList<>();
-
-        KeyboardRow row1 = new KeyboardRow();
-        row1.add(new KeyboardButton("Get Tron Token Info"));
-        row1.add(new KeyboardButton("Analyze Transaction"));
-
-        keyboard.add(row1);
-        keyboardMarkup.setKeyboard(keyboard);
-        keyboardMarkup.setResizeKeyboard(true);
-        keyboardMarkup.setOneTimeKeyboard(false);
-
-        return keyboardMarkup;
+    private void handleUserRegistration(long chatId, String name, String telegramUsername) throws TelegramApiException {
+        try {
+            userService.createNewUser(name, telegramUsername, null);
+            sendResponseWithMenu(chatId, "✅ Registration successful! Welcome, " + name + "!");
+            currentState = BotState.MAIN_MENU;
+        } catch (IllegalArgumentException e) {
+            sendErrorMessage(chatId, e.getMessage());
+            promptForRegistration(chatId);
+        }
     }
 
     private void requestContractAddress(long chatId) throws TelegramApiException {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
-        message.setText("Please enter the TRON contract address:");
+        message.setText("📝 Please enter the TRON contract address:");
         message.setReplyMarkup(createBackToMenuKeyboard());
 
         execute(message);
@@ -129,29 +132,15 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
     private void requestTransactionHash(long chatId) throws TelegramApiException {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
-        message.setText("Please enter the transaction hash to analyze:");
+        message.setText("📝 Please enter the transaction hash to analyze:");
         message.setReplyMarkup(createBackToMenuKeyboard());
 
         execute(message);
         currentState = BotState.AWAITING_TRANSACTION_HASH;
     }
 
-    private ReplyKeyboardMarkup createBackToMenuKeyboard() {
-        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-        List<KeyboardRow> keyboard = new ArrayList<>();
-
-        KeyboardRow row = new KeyboardRow();
-        row.add(new KeyboardButton("Back to Menu"));
-
-        keyboard.add(row);
-        keyboardMarkup.setKeyboard(keyboard);
-        keyboardMarkup.setResizeKeyboard(true);
-        keyboardMarkup.setOneTimeKeyboard(true);
-
-        return keyboardMarkup;
-    }
-
-    private void handleContractAddressInput(long chatId, String contractAddress) throws TelegramApiException {
+    private void handleContractAddressInput(long chatId, String contractAddress, String telegramUsername)
+            throws TelegramApiException {
         if ("Back to Menu".equalsIgnoreCase(contractAddress)) {
             returnToMainMenu(chatId);
             return;
@@ -161,15 +150,20 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
             TokenStatsDTO tokenStats = contractApi.getMainInfo(contractAddress);
             String response = formatTokenStatsResponse(contractAddress, tokenStats);
 
+            // Save to user history
+            User user = userService.findUser(telegramUsername, null)
+                                   .orElseThrow(() -> new IllegalArgumentException("User not found"));
+            userService.saveUserRequest(user.getId(), tokenStats, new TransactionAnalysisDTO());
+
             sendResponseWithMenu(chatId, response);
-            currentState = BotState.MAIN_MENU;
         } catch (Exception e) {
-            sendErrorMessage(chatId, "Error processing contract address: " + e.getMessage());
-            requestContractAddress(chatId); // Retry
+            sendErrorMessage(chatId, "Error processing contract: " + e.getMessage());
+            requestContractAddress(chatId);
         }
     }
 
-    private void handleTransactionHashInput(long chatId, String transactionHash) throws TelegramApiException {
+    private void handleTransactionHashInput(long chatId, String transactionHash, String telegramUsername)
+            throws TelegramApiException {
         if ("Back to Menu".equalsIgnoreCase(transactionHash)) {
             returnToMainMenu(chatId);
             return;
@@ -179,45 +173,43 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
             TransactionAnalysisDTO analysis = contractApi.getTransactionInfo(transactionHash);
             String response = formatTransactionAnalysisResponse(analysis);
 
-            // Split long message into parts
+            // Save to user history
+            User user = userService.findUser(telegramUsername, null)
+                                   .orElseThrow(() -> new IllegalArgumentException("User not found"));
+            userService.saveUserRequest(user.getId(), new TokenStatsDTO(), analysis);
+
             splitAndSendMessage(chatId, response);
-            currentState = BotState.MAIN_MENU;
         } catch (Exception e) {
             sendErrorMessage(chatId, "Error analyzing transaction: " + e.getMessage());
-            requestTransactionHash(chatId); // Retry
+            requestTransactionHash(chatId);
         }
     }
 
-    private void splitAndSendMessage(long chatId, String text) throws TelegramApiException {
-        int maxLength = 4000;
-        if (text.length() <= maxLength) {
-            sendResponseWithMenu(chatId, text);
-            return;
-        }
+    private void displayUserHistory(long chatId, String telegramUsername) throws TelegramApiException {
+        try {
+            List<RequestDTO> history = userService.getUserHistory(telegramUsername, null);
 
-        String[] lines = text.split("\n");
-        StringBuilder currentMessage = new StringBuilder();
-
-        for (String line : lines) {
-            if (currentMessage.length() + line.length() + 1 > maxLength) {
-                sendPlainMessage(chatId, currentMessage.toString());
-                currentMessage = new StringBuilder();
+            if (history.isEmpty()) {
+                sendResponseWithMenu(chatId, "📭 You don't have any saved requests yet.");
+                return;
             }
-            currentMessage.append(line).append("\n");
+
+            StringBuilder response = new StringBuilder("📜 Your Request History:\n\n");
+            for (RequestDTO request : history) {
+                response.append("🔹 ").append(request.getAddress() != null ?
+                                                     "Contract: " + request.getAddress() :
+                                                     "TX: " + request.getHash())
+                        .append("\n");
+                if (request.getTransactionResult() != null && request.getTransactionResult().getTimestamp() != null) {
+                    response.append("   ⏱ ").append(request.getTransactionResult().getTimestamp()).append("\n");
+                }
+                response.append("\n");
+            }
+
+            splitAndSendMessage(chatId, response.toString());
+        } catch (Exception e) {
+            sendErrorMessage(chatId, "Error retrieving history: " + e.getMessage());
         }
-
-        if (currentMessage.length() > 0) {
-            sendPlainMessage(chatId, currentMessage.toString());
-        }
-
-        sendResponseWithMenu(chatId, currentMessage.toString());
-    }
-
-    private void sendPlainMessage(long chatId, String text) throws TelegramApiException {
-        SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(chatId));
-        message.setText(text);
-        execute(message);
     }
 
     private String formatTokenStatsResponse(String contractAddress, TokenStatsDTO tokenStats) {
@@ -359,27 +351,59 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
         return escapeMarkdown(number.toString());
     }
 
-    private void sendResponseWithMenu(long chatId, String response) throws TelegramApiException {
+    private void splitAndSendMessage(long chatId, String text) throws TelegramApiException {
+        int maxLength = 4000;
+        if (text.length() <= maxLength) {
+            sendResponseWithMenu(chatId, text);
+            return;
+        }
+
+        // Split the message into parts
+        for (int i = 0; i < text.length(); i += maxLength) {
+            String part = text.substring(i, Math.min(text.length(), i + maxLength));
+            if (i + maxLength >= text.length()) {
+                sendResponseWithMenu(chatId, part);
+            } else {
+                sendPlainMessage(chatId, part);
+            }
+        }
+    }
+
+    private void sendPlainMessage(long chatId, String text) throws TelegramApiException {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
-        message.setText(response);
-        message.setReplyMarkup(createMainMenuKeyboard());
-        message.enableMarkdown(true);
-
+        message.setText(text);
         execute(message);
+    }
+
+    private void sendResponseWithMenu(long chatId, String text) throws TelegramApiException {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText(text);
+        message.setReplyMarkup(createMainMenuKeyboard());
+        execute(message);
+        currentState = BotState.MAIN_MENU;
     }
 
     private void returnToMainMenu(long chatId) throws TelegramApiException {
         sendWelcomeMessage(chatId);
+    }
+
+    private void sendWelcomeMessage(long chatId) throws TelegramApiException {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("🤖 Welcome to Columine Bot!\n\n" +
+                                "Choose an option from the menu below:");
+        message.setReplyMarkup(createMainMenuKeyboard());
+        execute(message);
         currentState = BotState.MAIN_MENU;
     }
 
     private void sendUnknownCommandMessage(long chatId) throws TelegramApiException {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
-        message.setText("I didn't understand that command. Please use the menu buttons.");
+        message.setText("⚠️ Unknown command. Please use the menu buttons.");
         message.setReplyMarkup(createMainMenuKeyboard());
-
         execute(message);
     }
 
@@ -387,10 +411,45 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
         try {
             SendMessage message = new SendMessage();
             message.setChatId(String.valueOf(chatId));
-            message.setText("⚠️ " + errorMessage);
+            message.setText("❌ " + errorMessage);
             execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    private ReplyKeyboardMarkup createMainMenuKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(false);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow row1 = new KeyboardRow();
+        row1.add(new KeyboardButton("Get Tron Token Info"));
+        row1.add(new KeyboardButton("Analyze Transaction"));
+
+        KeyboardRow row2 = new KeyboardRow();
+        row2.add(new KeyboardButton("My History"));
+
+        keyboard.add(row1);
+        keyboard.add(row2);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        return keyboardMarkup;
+    }
+
+    private ReplyKeyboardMarkup createBackToMenuKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(true);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        row.add(new KeyboardButton("Back to Menu"));
+        keyboard.add(row);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        return keyboardMarkup;
     }
 }
