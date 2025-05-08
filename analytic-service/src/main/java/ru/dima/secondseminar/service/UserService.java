@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dima.secondseminar.dto.RequestDTO;
@@ -54,7 +53,7 @@ public class UserService {
                    .toList();
     }
 
-    private static RequestDTO convertToDTO(Request request) {
+    private RequestDTO convertToDTO(Request request) {
         return new RequestDTO(
                 request.getId(),
                 request.getHash(),
@@ -95,7 +94,8 @@ public class UserService {
         if (existingUser.isPresent()) {
             User userToUpdate = existingUser.get();
 
-            if (name != null) userToUpdate.setName(name);
+            if (name != null)
+                userToUpdate.setName(name);
             if (telegramId != null && !userToUpdate.getTelegramId().equals(telegramId)) {
                 if (userRepository.existsByTelegramId(telegramId)) {
                     throw new IllegalArgumentException("Telegram ID already in use by another user");
@@ -176,16 +176,16 @@ public class UserService {
 
     public UserDTO fromEntity(User user) {
         return UserDTO.builder()
-                              .id(user.getId())
-                              .name(user.getName())
-                              .telegramId(user.getTelegramId())
-                              .tronWallet(user.getTronWallet())
-                              .requestIds(
-                                      user.getRequests() != null
-                                              ? user.getRequests().stream().map(UserService::convertToDTO).toList()
-                                              : List.of()
-                              )
-                              .build();
+                      .id(user.getId())
+                      .name(user.getName())
+                      .telegramId(user.getTelegramId())
+                      .tronWallet(user.getTronWallet())
+                      .requestIds(
+                              user.getRequests() != null
+                                      ? user.getRequests().stream().map(this::convertToDTO).toList()
+                                      : List.of()
+                      )
+                      .build();
     }
 
 }
