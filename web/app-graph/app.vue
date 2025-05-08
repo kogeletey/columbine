@@ -10,7 +10,6 @@ import { computed } from 'vue'
 import { rawPayload } from '../state/data'
 
 const props = defineProps<{
-  backend?: Backend | undefined
   error?: unknown
 }>()
 

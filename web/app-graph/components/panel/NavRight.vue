@@ -17,8 +17,9 @@ function newInspect() {
       flex="~ items-center"
       px3 py2
       bg-glass border border-base shadow
+      gap2
     >
-            Sign In
+      <TronLink />
             <!--
       <button
         v-if="rawPayload"
@@ -31,6 +32,13 @@ function newInspect() {
         <div i-ph-plus-circle-duotone text-xl />
       </button>
             -->
+
+      <button>
+        <div i-ph-eye-duotone text-xl />
+      </button>
+      <button>
+        <div i-ph-eye-slash text-xl />
+      </button>
 
       <button
         v-tooltip="'Toggle Dark Mode'"

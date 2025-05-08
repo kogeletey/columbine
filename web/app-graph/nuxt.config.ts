@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxt/eslint',
     'nuxt-eslint-auto-explicit-import',
-    'nuxt-mcp'
+    'nuxt-mcp',
+    '@pinia/nuxt',
   ],
 
   logLevel: 'verbose',

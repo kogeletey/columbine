@@ -1,7 +1,7 @@
 <template>
   <div flex="~ gap-1.1 items-center" p3 pl5 pr4 text-hex-222a dark:text-hex-888e>
     Made with
-    <a href="https://nuxt.com" target="_blank" rel="noopener" flex="~ gap-1.1 items-center">
+    <a href="https://nuxt,com" target="_blank" rel="noopener" flex="~ gap-1.1 items-center">
       <div i-logos-nuxt-icon text-0.6rem mr--0.6 />
       <span text-hex-01dc82>Nuxt</span>
     </a>
