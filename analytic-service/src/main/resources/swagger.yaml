@@ -19,6 +19,49 @@ tags:
   - name: Analytics
     description: Blockchain contract and transaction analytics
 paths:
+  /getUser:
+    get:
+      tags:
+        - User
+      summary: Get user by identifiers
+      description: Returns a user by either their Telegram ID or Tron wallet address
+      operationId: getUserId
+      parameters:
+        - name: telegramId
+          in: query
+          description: Telegram ID of the user
+          required: false
+          schema:
+            type: string
+            example: "123456789"
+        - name: walletAddress
+          in: query
+          description: Tron wallet address of the user
+          required: false
+          schema:
+            type: string
+            example: "TXYZ123..."
+      responses:
+        '200':
+          description: User found successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request - neither parameter provided
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "At least one of telegramId or walletAddress must be provided"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /api/v1/tronscan/{tokenAddress}:
     get:
       tags:
@@ -82,8 +125,7 @@ paths:
       tags:
         - User
       summary: Get user history
-      description: Returns the transaction history for a user identified by either telegramId or walletAddress, saves
-        only past 20 queries
+      description: Returns the transaction history for a user identified by either telegramId or walletAddress, saves only past 10 queries
       operationId: getUserHistory
       parameters:
         - name: telegramId
@@ -247,6 +289,63 @@ paths:
 
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: Unique identifier of the user
+        name:
+          type: string
+          example: "John Doe"
+          description: Name of the user
+          maxLength: 100
+        telegramId:
+          type: string
+          example: "123456789"
+          description: Unique Telegram ID of the user
+          nullable: true
+        tronWallet:
+          type: string
+          example: "TXYZ123..."
+          description: Unique Tron wallet address
+          nullable: true
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestDTO'
+          description: List of requests associated with the user
+      required:
+        - id
+        - name
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: "2023-10-01T12:00:00Z"
+        status:
+          type: integer
+          example: 404
+        error:
+          type: string
+          example: "NOT_FOUND"
+        message:
+          type: string
+          example: "User not found with provided identifiers"
+        path:
+          type: string
+          example: "/getUserId"
+      required:
+        - timestamp
+        - status
+        - error
+        - message
+
     RequestDTO:
       type: object
       properties:
@@ -332,6 +431,28 @@ components:
         - name
         - tokenType
         - contractAddress
+
+    # TokenStatsDTO:
+    #   type: object
+    #   properties:
+    #     tokenBalance:
+    #       type: number
+    #       format: double
+    #       example: 1000.5
+    #       description: Token balance
+    #     tokenValueUSD:
+    #       type: number
+    #       format: double
+    #       example: 1500.75
+    #       description: Token value in USD
+    #     transactionsCount:
+    #       type: integer
+    #       example: 42
+    #       description: Number of transactions
+    #   required:
+    #     - tokenBalance
+    #     - tokenValueUSD
+    #     - transactionsCount
 
     TransactionAnalysisDTO:
       type: object
