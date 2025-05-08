@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dima.secondseminar.dto.RequestDTO;
@@ -170,14 +171,5 @@ public class UserService {
                 ));
 
         this.userRepository.deleteById(user.getId());
-    }
-
-    public Long getUserId(String telegramId, String walletAddress) {
-        User user = findUser(telegramId, walletAddress)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "User not found with telegramId: %s or walletAddress: %s".formatted(telegramId, walletAddress)
-                ));
-
-        return user.getId();
     }
 }
