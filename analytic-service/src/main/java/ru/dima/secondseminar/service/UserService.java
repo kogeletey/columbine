@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.dima.secondseminar.dto.RequestDTO;
 import ru.dima.secondseminar.dto.TokenStatsDTO;
 import ru.dima.secondseminar.dto.TransactionAnalysisDTO;
+import ru.dima.secondseminar.dto.UserDTO;
 import ru.dima.secondseminar.entities.Request;
 import ru.dima.secondseminar.entities.User;
 import ru.dima.secondseminar.repositories.RequestRepository;
@@ -93,7 +94,8 @@ public class UserService {
         if (existingUser.isPresent()) {
             User userToUpdate = existingUser.get();
 
-            if (name != null) userToUpdate.setName(name);
+            if (name != null)
+                userToUpdate.setName(name);
             if (telegramId != null && !userToUpdate.getTelegramId().equals(telegramId)) {
                 if (userRepository.existsByTelegramId(telegramId)) {
                     throw new IllegalArgumentException("Telegram ID already in use by another user");
@@ -171,4 +173,19 @@ public class UserService {
 
         this.userRepository.deleteById(user.getId());
     }
+
+    public UserDTO fromEntity(User user) {
+        return UserDTO.builder()
+                      .id(user.getId())
+                      .name(user.getName())
+                      .telegramId(user.getTelegramId())
+                      .tronWallet(user.getTronWallet())
+                      .requestIds(
+                              user.getRequests() != null
+                                      ? user.getRequests().stream().map(this::convertToDTO).toList()
+                                      : List.of()
+                      )
+                      .build();
+    }
+
 }
