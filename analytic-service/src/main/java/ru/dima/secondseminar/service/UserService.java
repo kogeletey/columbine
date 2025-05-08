@@ -171,4 +171,13 @@ public class UserService {
 
         this.userRepository.deleteById(user.getId());
     }
+
+    public Long getUserId(String telegramId, String walletAddress) {
+        User user = findUser(telegramId, walletAddress)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "User not found with telegramId: %s or walletAddress: %s".formatted(telegramId, walletAddress)
+                ));
+
+        return user.getId();
+    }
 }

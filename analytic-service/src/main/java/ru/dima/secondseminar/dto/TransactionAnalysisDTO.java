@@ -26,7 +26,7 @@ public class TransactionAnalysisDTO {
         private String caller;
         private String callee;
         private String note;
-        private String value;  // Note: In JSON it's a number, but you have it as String
+        private String value;
         private List<CallNode> children;
     }
 

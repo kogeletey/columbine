@@ -66,4 +66,11 @@ public class UserController {
         userService.deleteUser(telegramId, walletAddress);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/getUserId")
+    public Long getUserId(
+            @RequestParam(required = false) String telegramId,
+            @RequestParam(required = false) String walletAddress) {
+        return userService.getUserId(telegramId, walletAddress);
+    }
 }

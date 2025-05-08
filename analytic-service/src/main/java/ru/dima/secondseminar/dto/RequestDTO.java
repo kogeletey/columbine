@@ -1,6 +1,5 @@
 package ru.dima.secondseminar.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
