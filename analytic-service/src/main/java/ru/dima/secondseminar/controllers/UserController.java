@@ -110,7 +110,8 @@ public class UserController {
 
         Optional<User> user = userService.findUser(telegramId, walletAddress);
 
-        return user.map(ResponseEntity::ok)
+        return user.map(userService::fromEntity)
+                   .map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

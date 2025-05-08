@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.dima.secondseminar.dto.RequestDTO;
 import ru.dima.secondseminar.dto.TokenStatsDTO;
 import ru.dima.secondseminar.dto.TransactionAnalysisDTO;
+import ru.dima.secondseminar.dto.UserDTO;
 import ru.dima.secondseminar.entities.Request;
 import ru.dima.secondseminar.entities.User;
 import ru.dima.secondseminar.repositories.RequestRepository;
@@ -53,7 +54,7 @@ public class UserService {
                    .toList();
     }
 
-    private RequestDTO convertToDTO(Request request) {
+    private static RequestDTO convertToDTO(Request request) {
         return new RequestDTO(
                 request.getId(),
                 request.getHash(),
@@ -172,4 +173,19 @@ public class UserService {
 
         this.userRepository.deleteById(user.getId());
     }
+
+    public UserDTO fromEntity(User user) {
+        return UserDTO.builder()
+                              .id(user.getId())
+                              .name(user.getName())
+                              .telegramId(user.getTelegramId())
+                              .tronWallet(user.getTronWallet())
+                              .requestIds(
+                                      user.getRequests() != null
+                                              ? user.getRequests().stream().map(UserService::convertToDTO).toList()
+                                              : List.of()
+                              )
+                              .build();
+    }
+
 }
