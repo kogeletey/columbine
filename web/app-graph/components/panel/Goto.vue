@@ -15,8 +15,7 @@ function onCommitted(node: PackageNode) {
 
 <template>
   <div
-    bg-glass rounded-full border border-base
-    shadow transition-all duration-300 h-12 relative
+    transition-all duration-300 h-12 relative
     focus-within="ring-4 ring-primary:20 w-60"
     :class="input ? 'border-primary w-60' : 'w-12'"
   >

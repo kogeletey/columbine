@@ -23,6 +23,7 @@
     "find-up": "^7.0.0",
     "floating-vue": "^5.2.2",
     "modern-screenshot": "^4.6.0",
+    "nanovis": "^0.1.0",
     "nuxt": "^3.17.1",
     "nuxt-mcp": "^0.1.2",
     "pinia": "^3.0.2",

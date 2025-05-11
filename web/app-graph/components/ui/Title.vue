@@ -17,10 +17,10 @@ defineProps<{
       </div>
     </div>
     <div flex="~ gap-1" leading-none text-4xl mt-5>
-      <span font-700 text-primary transition-all duration-300 :class="hasError ? 'hue-rotate--105' : ''">Node Modules</span>
+      <span font-700 text-primary transition-all duration-300 :class="hasError ? 'hue-rotate--105' : ''">Analyzing contracts</span>
     </div>
     <div op-fade text-center>
-      Visualize your node_modules, inspect dependencies, and more.
+        It will be ready soon
     </div>
   </h1>
 </template>

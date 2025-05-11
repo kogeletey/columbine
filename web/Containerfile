@@ -1,0 +1,29 @@
+# Use the official Bun image as the base image
+FROM oven/bun:alpine AS build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and bun.lockb
+COPY ./app-graph/package.json ./app-graph/bun.lock ./
+
+# Install dependencies
+RUN bun install --frozen-lockfile --ignore-scripts
+
+COPY ./app-graph .
+
+# Copy the rest of the application code
+
+# Build the Nuxt application
+RUN bun run build
+
+FROM caddy:2.10-alpine
+
+WORKDIR /app
+
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /app/dist/public /usr/share/caddy
+
+EXPOSE 3000/tcp
+
+#CMD ["ls", "-la"]

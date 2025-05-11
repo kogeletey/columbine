@@ -17,6 +17,7 @@
         "find-up": "^7.0.0",
         "floating-vue": "^5.2.2",
         "modern-screenshot": "^4.6.0",
+        "nanovis": "^0.1.0",
         "nuxt": "^3.17.1",
         "nuxt-mcp": "^0.1.2",
         "pinia": "^3.0.2",
@@ -1555,6 +1556,8 @@
     "nanoid": ["nanoid@5.1.5", "", { "bin": { "nanoid": "bin/nanoid.js" } }, "sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw=="],
 
     "nanotar": ["nanotar@0.2.0", "", {}, "sha512-9ca1h0Xjvo9bEkE4UOxgAzLV0jHKe6LMaxo37ND2DAhhAtd0j8pR1Wxz+/goMrZO8AEZTWCmyaOsFI/W5AdpCQ=="],
+
+    "nanovis": ["nanovis@0.1.0", "", {}, "sha512-/X3jtce9plCa7/P39/WENY0PQyl5yqzIZKNu/BA2+2ubcHk7Q+Z58aS47yj/8tnGkz2IBAUhnWhJYERQvFAZ3Q=="],
 
     "natural-compare": ["natural-compare@1.4.0", "", {}, "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="],
 

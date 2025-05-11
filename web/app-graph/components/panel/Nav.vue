@@ -30,29 +30,11 @@ const tabsMeta = [
     icon: 'i-ph-chart-donut-duotone',
   },
   {
-    name: 'Compare',
-    path: '/compare',
-    icon: 'i-ph-flip-horizontal-duotone',
+    name: 'Add Contract',
+    path: '/',
+    icon: 'i-ph-plus-light',
   },
 ]
-
-function resetPanelState() {
-  isSettingOpen.value = false
-  isFiltersOpen.value = false
-}
-
-function onPanelHover() {
-  if (isSidepanelCollapsed.value)
-    settings.value.collapseSidepanel = false
-}
-
-function toggleSetting() {
-  isSettingOpen.value = !isSettingOpen.value
-}
-
-function toggleFilters() {
-  isFiltersOpen.value = !isFiltersOpen.value
-}
 </script>
 
 <template>
@@ -67,9 +49,8 @@ function toggleFilters() {
           w-10 h-10 rounded-full hover:bg-active
           flex="~ items-center justify-center"
           :title="tab.name"
-          :class="route.path.startsWith(tab.path) ? 'text-primary' : 'op-fade'"
+          :class="route.path.endsWith(tab.path) ? 'text-primary' : 'op-fade'"
           :to="{ path: tab.path, hash: location.hash }"
-          @click="resetPanelState()"
         >
           <div :class="tab.icon" text-xl />
         </RouterLink>
