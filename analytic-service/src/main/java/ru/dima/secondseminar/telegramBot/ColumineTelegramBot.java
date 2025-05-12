@@ -227,6 +227,13 @@ public class ColumineTelegramBot extends TelegramLongPollingBot {
                                                 escapeMarkdown(analysis.getBlockNumber()) : "N/A").append("\n\n");
 
         TransactionAnalysisDTO.Analysis analysisData = analysis.getAnalysis();
+        if (analysisData.getType().equals("SIMPLE")) {
+            sb.append("📊 *Analysis*\n");
+            sb.append("\n");
+            sb.append("Message: " + analysisData.getMessage() + "\n");
+            sb.append("\n");
+            sb.append("Possible transaction types: " + String.join(", ", analysisData.getPossibleTypes()) + "\n");
+        }
         sb.append("📊 *Analysis*\n");
         sb.append("┣ *Type:* ").append(analysisData.getType() != null ?
                                                escapeMarkdown(analysisData.getType()) : "N/A").append("\n");

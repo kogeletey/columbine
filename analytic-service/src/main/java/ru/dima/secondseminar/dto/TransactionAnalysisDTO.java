@@ -15,9 +15,11 @@ public class TransactionAnalysisDTO {
     @Data
     public static class Analysis {
         private String type;
+        private String message;
         private String mainContract;
         private Map<String, CallNode> callHierarchy;
         private List<EventLog> eventLogs;
+        private List<String> possibleTypes;
     }
 
     @Data
