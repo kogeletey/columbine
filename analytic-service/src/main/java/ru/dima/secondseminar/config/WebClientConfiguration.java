@@ -18,15 +18,6 @@ public class WebClientConfiguration {
                         .build();
     }
 
-    @Bean(name = "dappRadar")
-    public WebClient setDappRadarWebClient() {
-        return WebClient.builder()
-                        .baseUrl("https://apis.dappradar.com/v2/tokens/metrics/")
-                        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                        .defaultHeader("X-API-KEY", "JLFpnWueGX2N0qKt6FEpy5qDx6dvpcka7u9CnrgJ")
-                        .build();
-    }
-
     @Bean(name = "anltcService")
     public WebClient setAnalyticServiceWebClient() {
         return WebClient.builder()

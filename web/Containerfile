@@ -1,4 +1,4 @@
-# Use the official Bun image as the base image
+#
 FROM oven/bun:alpine AS build
 
 # Set the working directory
@@ -8,14 +8,14 @@ WORKDIR /app
 COPY ./app-graph/package.json ./app-graph/bun.lock ./
 
 # Install dependencies
-RUN bun install --frozen-lockfile --ignore-scripts
+RUN bun add @vueuse/nuxt && \
+    bun install --frozen-lockfile --ignore-scripts
 
 COPY ./app-graph .
 
-# Copy the rest of the application code
-
-# Build the Nuxt application
 RUN bun run build
+
+# Copy the rest of the application code
 
 FROM caddy:2.10-alpine
 
