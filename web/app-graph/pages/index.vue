@@ -15,10 +15,26 @@ const state = reactive({
 const router = useRouter()
 const route = useRoute()
 
+function isValidTronTransactionHash(hash) {
+    // Remove '0x' prefix if present
+    if (hash.startsWith('0x')) {
+        hash = hash.slice(2);
+    }
+
+    // Must be 64 hex chars
+    const regex = /^[0-9a-fA-F]{64}$/;
+    return regex.test(hash);
+}
+
 const getInput = async (): Promise<void> => {
     state.loader = true;
-    await contractsStore.fetchTokenInformation(input.value as string)
-    router.replace({ path: `/report/${state.getTokenAddress}`, hash: location.hash, query: route.query })
+    const inputValue = input.value as string
+    if (inputValue.startsWith('TR')) {
+        await contractsStore.fetchTokenInformation(inputValue)
+        router.replace({ path: `/report/${state.getTokenAddress}`, hash: location.hash, query: route.query })
+    } else if (isValidTronTransactionHash(inputValue)) {
+        router.replace({ path: `/graph/${inputValue}`, hash: location.hash, query: route.query})
+    }
     state.loader = false
 }
 

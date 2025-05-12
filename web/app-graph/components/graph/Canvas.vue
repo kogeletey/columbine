@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HierarchyLink, HierarchyNode } from 'd3-hierarchy'
-import type { PackageNode } from 'node-modules-tools'
+import type { PackageNode } from '@/types/node'
 import type { HighlightMode } from '../../state/highlight'
 import type { ComputedPayload } from '../../state/payload'
 import { onKeyPressed, useEventListener, useMagicKeys } from '@vueuse/core'
@@ -97,7 +97,8 @@ function calculateGraph() {
   // Rotate the graph from top-down to left-right
   const _nodes = root.descendants()
   for (const node of _nodes) {
-    [node.x, node.y] = [node.y! - SPACING.width, node.x!]
+    [node.x, node.y] = [node.x! - SPACING.width, node.y!]
+        console.log('get-nodes-x', node.x - 100)
   }
 
   // Offset the graph and adding margin
@@ -359,7 +360,7 @@ onMounted(() => {
         >
           <template v-if="node.data.spec !== '~root'">
             <component
-              :is="settings.graphRender === 'normal' ? GraphNode : GraphDot"
+              :is="GraphNode"
               :ref="(el: any) => nodesRefMap.set(node.data.spec, el?.$el)"
               :pkg="node.data"
               :highlight-mode="highlightMode"
@@ -377,10 +378,10 @@ onMounted(() => {
     <div
       fixed right-4 bottom-4 z-panel-nav flex="~ col gap-2 items-center"
     >
-      <div w-10 flex="~ items-center justify-center">
-        <UiTimeoutView :content="`${Math.round(scale * 100)}%`" class="text-sm" />
-      </div>
-
+      <!-- <div w-10 flex="~ items-center justify-center"> -->
+      <!--   <UiTimeoutView :content="`${Math.round(scale * 100)}%`" class="text-sm" /> -->
+      <!-- </div> -->
+      <!---->
       <div bg-glass rounded-full border border-base shadow>
         <button
           v-tooltip.left="'Zoom In (Ctrl + =)'"

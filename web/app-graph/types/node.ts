@@ -3,6 +3,7 @@ import type { Message as PublintMessage } from 'publint'
 import type { PackageInstallSizeInfo } from './size'
 
 export type { PackageJson, PublintMessage }
+export { type PackageNode } from './node'
 
 export type PackageModuleTypeSimple = 'cjs' | 'esm'
 export type PackageModuleType = 'cjs' | 'esm' | 'dual' | 'faux' | 'dts' | 'unknown'
@@ -85,4 +86,3 @@ export interface NpmMetaLatest extends NpmMeta {
    */
   vaildUntil: number
 }
-
