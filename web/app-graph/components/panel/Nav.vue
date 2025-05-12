@@ -15,26 +15,26 @@ const tabsMeta = [
     icon: 'i-ph-tree-structure-duotone',
   },
   {
-    name: 'Grid View',
-    path: '/grid',
-    icon: 'i-ph-grid-nine-duotone',
-  },
-  {
     name: 'Report View',
     path: '/report',
     icon: 'i-ph-projector-screen-chart-duotone',
   },
   {
-    name: 'Chart View',
-    path: '/chart',
-    icon: 'i-ph-chart-donut-duotone',
+    name: 'Watch contracts',
+    path: '/grid',
+    icon: 'i-ph-grid-nine-duotone',
   },
+
   {
     name: 'Add Contract',
     path: '/',
     icon: 'i-ph-plus-light',
   },
 ]
+
+function isValidPath(str, check) {
+    return str && str !== '/' && str.startsWith(check);
+}
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const tabsMeta = [
           w-10 h-10 rounded-full hover:bg-active
           flex="~ items-center justify-center"
           :title="tab.name"
-          :class="route.path.endsWith(tab.path) ? 'text-primary' : 'op-fade'"
+          :class="isValidPath(route.path, tab.path) && route.path === '/' ? 'text-primary' : 'op-fade'"
           :to="{ path: tab.path, hash: location.hash }"
         >
           <div :class="tab.icon" text-xl />

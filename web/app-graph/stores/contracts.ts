@@ -6,7 +6,8 @@ export const useContractsStore = defineStore('contract', {
     state: () => ({
         _contractAddress: '',
         _tokenInformation: {},
-        _tokenInformationStorage: {}
+        _tokenInformationStorage: {},
+        _transactionInformation: {}
     }),
     getters: {
         getTokenAddress: state => state._contractAddress,
@@ -14,10 +15,11 @@ export const useContractsStore = defineStore('contract', {
     },
     actions: {
         async fetchTokenInformation(address: string) {
-            const fromStorage = localStorage.getItem('token-information')
-            console.log('get-information-from-storage', fromStorage)
+            const fromStorageStringify = localStorage.getItem('token-information')
+            const fromStorage = JSON.parse(fromStorageStringify || '{}')
             if (fromStorage && fromStorage?.contractAddress === address) {
                 this.setResultInformation(fromStorage)
+                this._contractAddress = address;
                 return fromStorage
             } else {
                 const result = await fetchWithDomain(`/api/v1/tronscan/${address}`)
@@ -29,6 +31,14 @@ export const useContractsStore = defineStore('contract', {
         setResultInformation(result) {
             this._tokenInformation = result
             useStorage('token-information',this._tokenInformation,localStorage)
+        },
+        async fetchTranscationGraph(address: string) {
+            const result = await fetchWithDomain(`/api/v1/tronscan/${address}`)
+            this.setTransactionResult(result)
+            return result;
+         },
+        setTransactionResult(result) {
+            this._transactionInformation = result
         }
     }
 })

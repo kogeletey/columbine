@@ -7,9 +7,12 @@ services:
       - "3001:3000"
 
   frontend:
+    profiles: ['frontend']
     build:
      context: ./web
      dockerfile: Containerfile
+    volumes:
+      - ./.compose-data/caddy:/caddy/data
     ports:
       - "3000:3000"
 
@@ -37,6 +40,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ./.compose-data/pgdata:/var/lib/postgresql/data
 
 # No volumes section needed anymore

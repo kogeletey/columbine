@@ -7,7 +7,9 @@ import { useContractsStore } from "#imports";
 
 const contractsStore = useContractsStore();
 
-const params = useRoute().params as Record<string, string>;
+const route = useRoute()
+
+const params = route.params as Record<string, string>;
 const selected = computed(() => params.report[0] || "all");
 
 const state = reactive({
@@ -15,8 +17,17 @@ const state = reactive({
     tokenInfo: computed(() => contractsStore.getTokenInformation),
 });
 
+const router = useRouter()
+
+function formatNumberWithCommas(n, locale = "en") {
+  return Number(n).toLocaleString(locale);
+}
+
 onMounted(async () => {
-        await contractsStore.fetchTokenInformation(selected.value);
+    if (selected.value === 'all') {
+        router.replace({ path: `/`, hash: location.hash, query: route.query})
+    }
+    await contractsStore.fetchTokenInformation(selected.value);
 });
 </script>
 
@@ -26,9 +37,9 @@ onMounted(async () => {
             'transition-none!': $route.meta.noOffset,
         },
         'report-page',
-    ]" grid="~ cols-2">
-        <section h-full grid="~ place-items-center">
-                <div>
+    ]" grid="~ cols-2 gap-2">
+        <section h-full grid="~ place-items-center place-content-center" border>
+                <div class="report-page__basic">
                     <picture>
                         <figure>
                             <img :src="state.tokenInfo.logo" />
@@ -37,15 +48,21 @@ onMounted(async () => {
                     <h3>
                         {{ state.tokenInfo?.name }}
                     </h3>
-                    <a :href="state.tokenInfo.projectPage"> Project Page </a>
+                    <a :href="state.tokenInfo.projectPage">
+                        Project Page
+                        <div i-ph-arrow-circle-up-right-duotone></div>
+                    </a>
                 </div>
-            <div>
-                <span class="report-page__info"> MarketCap: {{ state.tokenInfo.marketCap }} </span>
-                <span class="report-page__info"> Total Liquids: {{ state.tokenInfo.liqudity }} </span>
-                <span class="report-page__info"> Total Supply: {{ state.tokenInfo.totalSupply }} </span>
+            <div class="report-page__cap">
+                <span class="report-page__info" v-if="state.tokenInfo.marketCap"> MarketCap: {{ formatNumberWithCommas(state.tokenInfo.marketCap) }} $ </span>
+                <span class="report-page__info" v-if="state.tokenInfo.liquidity"> Total Liquids: {{ formatNumberWithCommas(state.tokenInfo.liquidity) }} $ </span>
+                <span class="report-page__info" v-if="state.tokenInfo.totalSupply"> Total Supply: {{ formatNumberWithCommas(state.tokenInfo.totalSupply) }} $ </span>
             </div>
         </section>
-        <DisplayTrading :address="state.getTokenAddress" />
+        <section class="report-page__price">
+            <h3> Price: </h3>
+            <DisplayTrading :address="state.getTokenAddress" />
+        </section>
     </main>
 </template>
 
@@ -57,6 +74,28 @@ onMounted(async () => {
 }
 
 .report-page__info {
+    display: flex;
+    font-size: 18px;
+}
 
+.report-page__cap {
+}
+
+.report-page__basic {
+   display: grid;
+   grid-template-areas: 'a b'
+    'a c';
+    gap: 15px;
+  & picture {
+    grid-area: a;
+    }
+  & h3 {
+        font-weight: bold;
+        font-size: 20px;
+    }
+  & a:hover {
+        --un-text-opacity: 1;
+  color: rgb(87 158 75 / var(--un-text-opacity));
+    }
 }
 </style>
