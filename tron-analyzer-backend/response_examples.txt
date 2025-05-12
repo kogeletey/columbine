@@ -1,0 +1,315 @@
+{
+    "transactionHash": "0c28afd04fbcc1dfe330b0d211cf46677f335c333237b82a9d9d24d34d183f49",
+    "timestamp": "2025-05-03T10:29:36.000Z",
+    "blockNumber": 71870973,
+    "analysis": {
+        "type": "SMART_CONTRACT",
+        "mainContract": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+        "callHierarchy": {
+            "5ae025495dee7e9ba694fd71fb8bd6b2621cec4e149345ff56e369990e8c7cf5": {
+                "hash": "5ae025495dee7e9ba694fd71fb8bd6b2621cec4e149345ff56e369990e8c7cf5",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "note": "call",
+                "value": 0,
+                "children": [
+                    {
+                        "hash": "36342e5ba1991b441404af98acd41a3c335e483ac3820ac0c6f86090b2d9bcae",
+                        "caller": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                        "callee": "TDxL4V5LE6TYSFXSCWJkkSsCYbgmrDnTer",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "34945191fa3ed2587d1384769507094f824e2c05ba5f03fea9a37fea2622083d",
+                        "caller": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                        "callee": "TDxL4V5LE6TYSFXSCWJkkSsCYbgmrDnTer",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "fae2fecf8f4a447ee78a069e03cb696ff8b13d7079152205760bf691ecb4858e",
+                        "caller": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                        "callee": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    }
+                ]
+            },
+            "6d3c1ed2d66be8e6cc43ff5b0094351de78a7f28fc599f8cfb7ff1f14bcbfeed": {
+                "hash": "6d3c1ed2d66be8e6cc43ff5b0094351de78a7f28fc599f8cfb7ff1f14bcbfeed",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "note": "call",
+                "value": 0,
+                "children": [
+                    {
+                        "hash": "696c933231b77e0289731c1fc399079a5d63dd9d7b704364175708e4df311b4f",
+                        "caller": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                        "callee": "TFaCCmRQYbhZkqLumkNDmZMHTipn77FNKn",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "74884c0b86b5d8776765fa509fb68b86a548329df1369e61f299f7f15f9791d0",
+                        "caller": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                        "callee": "TDxL4V5LE6TYSFXSCWJkkSsCYbgmrDnTer",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "afaa0dcbadef0ea596c2df84c889c5e5028c9dc0aa6b8ec0f6ea0df110ca7a56",
+                        "caller": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                        "callee": "TFaCCmRQYbhZkqLumkNDmZMHTipn77FNKn",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    }
+                ]
+            },
+            "2a8ff653d6855fd856e87e6f4a9d7830317a213531625e5265886be992607276": {
+                "hash": "2a8ff653d6855fd856e87e6f4a9d7830317a213531625e5265886be992607276",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "note": "call",
+                "value": 0,
+                "children": [
+                    {
+                        "hash": "fbefdc82779677b6b8eab40ea0ab85ce4b2c53cfdffc3093ccef1583e77183aa",
+                        "caller": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                        "callee": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "415d6c8699bdb275dc2d3cf37d4cf64019010c3bea9653044432f2c63194a786",
+                        "caller": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                        "callee": "TFaCCmRQYbhZkqLumkNDmZMHTipn77FNKn",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    },
+                    {
+                        "hash": "a6659a63734a9a55e44ac6ba59f3c12cd450d778d6a67515716952d24f96bbc5",
+                        "caller": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                        "callee": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                        "note": "call",
+                        "value": 0,
+                        "children": []
+                    }
+                ]
+            },
+            "0757ce3ebad9cda23c8690b064a92a7c7e787a7eb9e36c928df7d67f3eb3e8fa": {
+                "hash": "0757ce3ebad9cda23c8690b064a92a7c7e787a7eb9e36c928df7d67f3eb3e8fa",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                "note": "call",
+                "value": 0,
+                "children": []
+            },
+            "2d3dbebc8a302a4b2961918a0c8eacd40a77207f8f8997dc651b81eac74980e0": {
+                "hash": "2d3dbebc8a302a4b2961918a0c8eacd40a77207f8f8997dc651b81eac74980e0",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "note": "call",
+                "value": 0,
+                "children": []
+            },
+            "0eb4077d62872474ce7f62151ffdc4ba450798de3fc65bb708a9451187d9020d": {
+                "hash": "0eb4077d62872474ce7f62151ffdc4ba450798de3fc65bb708a9451187d9020d",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "note": "call",
+                "value": 0,
+                "children": []
+            },
+            "0a0ac3419807609d1b0b31ba4eeae7064fa8c38804ac27e487dbb07ae92dacc2": {
+                "hash": "0a0ac3419807609d1b0b31ba4eeae7064fa8c38804ac27e487dbb07ae92dacc2",
+                "caller": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "callee": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "note": "call",
+                "value": 0,
+                "children": []
+            }
+        },
+        "eventLogs": [
+            {
+                "contract": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                "eventType": "Transfer",
+                "decoded": false,
+                "signature": "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "possibleEvent": "Transfer",
+                "event": "Transfer",
+                "from": "TCeKLAgA3mQhrWLtLZJHBiFXbcnh55qrcV",
+                "to": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "value": {
+                    "raw": 26100000,
+                    "formatted": "2.61e+7",
+                    "trx": "26.1"
+                }
+            },
+            {
+                "contract": "TDxL4V5LE6TYSFXSCWJkkSsCYbgmrDnTer",
+                "eventType": "Transfer",
+                "decoded": false,
+                "signature": "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "possibleEvent": "Transfer",
+                "event": "Transfer",
+                "from": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "to": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "value": {
+                    "raw": 1.493964106291303e+22,
+                    "formatted": "1.493964106291303e+22",
+                    "trx": "14939641062913030"
+                }
+            },
+            {
+                "contract": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "eventType": "unknown",
+                "decoded": false,
+                "signature": "1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1",
+                "possibleEvent": "unknown",
+                "rawData": "0000000000000000000000000000000000000000009aeb410e21ab0da4d3f5420000000000000000000000000000000000000000000000000000004bf54c0d50",
+                "rawTopics": []
+            },
+            {
+                "contract": "TLkhSBpYbgQ4A7nEUaC4cYXmhiZjuks9oX",
+                "eventType": "Swap",
+                "decoded": false,
+                "signature": "d78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+                "possibleEvent": "Swap",
+                "event": "Swap",
+                "sender": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "to": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "amount0In": 0,
+                "amount1In": {
+                    "raw": 6681600000,
+                    "formatted": "6.6816e+9",
+                    "trx": "6681.6"
+                },
+                "amount0Out": {
+                    "raw": 3.8245481121057357e+24,
+                    "formatted": "3.8245481121057357e+24",
+                    "trx": "3824548112105735700"
+                },
+                "amount1Out": 0
+            },
+            {
+                "contract": "TFaCCmRQYbhZkqLumkNDmZMHTipn77FNKn",
+                "eventType": "Transfer",
+                "decoded": false,
+                "signature": "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "possibleEvent": "Transfer",
+                "event": "Transfer",
+                "from": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "to": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "value": {
+                    "raw": 1.896547063816258e+23,
+                    "formatted": "1.896547063816258e+23",
+                    "trx": "189654706381625800"
+                }
+            },
+            {
+                "contract": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "eventType": "unknown",
+                "decoded": false,
+                "signature": "1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1",
+                "possibleEvent": "unknown",
+                "rawData": "0000000000000000000000000000000000000000000088f2094338d66af0864d00000000000000000000000000000000000000000006a76f54f6db5d3de86f53",
+                "rawTopics": []
+            },
+            {
+                "contract": "TNBjzyLNTkXvSiNTXVGCCtEX9BDja1rT93",
+                "eventType": "Swap",
+                "decoded": false,
+                "signature": "d78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+                "possibleEvent": "Swap",
+                "event": "Swap",
+                "sender": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "to": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "amount0In": {
+                    "raw": 3.8245481121057357e+24,
+                    "formatted": "3.8245481121057357e+24",
+                    "trx": "3824548112105735700"
+                },
+                "amount1In": 0,
+                "amount0Out": 0,
+                "amount1Out": {
+                    "raw": 1.896547063816258e+23,
+                    "formatted": "1.896547063816258e+23",
+                    "trx": "189654706381625800"
+                }
+            },
+            {
+                "contract": "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+                "eventType": "Transfer",
+                "decoded": false,
+                "signature": "ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "possibleEvent": "Transfer",
+                "event": "Transfer",
+                "from": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "to": "TCeKLAgA3mQhrWLtLZJHBiFXbcnh55qrcV",
+                "value": {
+                    "raw": 26699131,
+                    "formatted": "2.6699131e+7",
+                    "trx": "26.699131"
+                }
+            },
+            {
+                "contract": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "eventType": "unknown",
+                "decoded": false,
+                "signature": "1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1",
+                "possibleEvent": "unknown",
+                "rawData": "0000000000000000000000000000000000000000013dc2a09eb71661f2c5a6400000000000000000000000000000000000000000000000000000000c9f7e3aca",
+                "rawTopics": []
+            },
+            {
+                "contract": "TAP5wNDjYPgZ4jFzrN2GXSRh4ywZk6xpX8",
+                "eventType": "Swap",
+                "decoded": false,
+                "signature": "d78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+                "possibleEvent": "Swap",
+                "event": "Swap",
+                "sender": "TXF1xDbVGdxFGbovmmmXvBGu8ZiE3Lq4mR",
+                "to": "TCeKLAgA3mQhrWLtLZJHBiFXbcnh55qrcV",
+                "amount0In": {
+                    "raw": 4.855160483369621e+25,
+                    "formatted": "4.855160483369621e+25",
+                    "trx": "48551604833696210000"
+                },
+                "amount1In": 0,
+                "amount0Out": 0,
+                "amount1Out": {
+                    "raw": 26699131,
+                    "formatted": "2.6699131e+7",
+                    "trx": "26.699131"
+                }
+            }
+        ]
+    }
+}
+
+
+
+==========================================================================
+{
+    "transactionHash": "2d97bdb97eebb9a43f8fce0f63cd012c80e2ed2bcc8ce239740deb1676399ff5",
+    "timestamp": "2025-05-05T21:12:39.000Z",
+    "blockNumber": 71941408,
+    "analysis": {
+        "type": "SIMPLE",
+        "message": "No internal transactions",
+        "possibleTypes": [
+            "TRX transfer",
+            "Contract creation",
+            "Simple contract call"
+        ]
+    }
+}
