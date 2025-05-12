@@ -3,7 +3,6 @@ import type { PackageNode } from 'node-modules-tools'
 import { useRouter } from '#app/composables/router'
 import { Menu as VMenu } from 'floating-vue'
 import { computed, nextTick, watch } from 'vue'
-import { getBackend } from '../../backends'
 import { selectedNode } from '../../state/current'
 import { fetchPublintMessages, rawPublintMessages } from '../../state/data'
 import { filters } from '../../state/filters'
@@ -15,8 +14,6 @@ import { getPackageData } from '../../utils/package-json'
 const props = defineProps<{
   pkg: PackageNode
 }>()
-
-const backend = getBackend()
 
 const duplicated = computed(() => {
   const value = payloads.filtered.versions.get(props.pkg.name)
@@ -293,20 +290,16 @@ const thirdPartyServices = computed(() => {
             :fundings="resolved.fundings"
           />
           <button
-            v-if="backend?.functions.openInEditor && pkg.filepath"
             v-tooltip="'Open Package Folder in Editor'"
             title="Open Package Folder in Editor"
             ml--1 w-8 h-8 rounded-full hover:bg-active flex
-            @click="backend.functions.openInEditor(pkg.filepath)"
           >
             <div i-catppuccin-folder-vscode hover:i-catppuccin-folder-vscode-open icon-catppuccin ma />
           </button>
           <button
-            v-if="backend?.functions.openInFinder && pkg.filepath"
             v-tooltip="'Open Package Folder in File Explorer'"
             title="Open Package Folder in File Explorer"
             ml--1 w-8 h-8 rounded-full hover:bg-active flex
-            @click="backend.functions.openInFinder(pkg.filepath)"
           >
             <div i-catppuccin-folder-command hover:i-catppuccin-folder-command-open icon-catppuccin ma />
           </button>

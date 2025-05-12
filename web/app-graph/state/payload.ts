@@ -1,5 +1,5 @@
 import type { NpmMeta, NpmMetaLatest, PackageNode } from 'node-modules-tools'
-import { CLUSTER_DEP_DEV, CLUSTER_DEP_OPTIONAL, CLUSTER_DEP_PROD } from 'node-modules-tools/constants'
+import { CLUSTER_DEP_DEV, CLUSTER_DEP_OPTIONAL, CLUSTER_DEP_PROD } from '../types/constants.ts'
 import { computed, reactive, watch } from 'vue'
 import { buildVersionToPackagesMap } from '../utils/maps'
 import { rawNpmMeta, rawNpmMetaLatest, rawPayload, rawReferencePayload } from './data'

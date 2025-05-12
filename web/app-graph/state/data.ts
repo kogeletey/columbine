@@ -1,10 +1,16 @@
-import type { NpmMeta, NpmMetaLatest, PackageNode, PublintMessage } from 'node-modules-tools'
+import type { NpmMeta, NpmMetaLatest, PackageNode, PublintMessage } from '../types/node.ts'
 import type { NodeModulesInspectorPayload } from '../../shared/types'
 import { ref, shallowRef, toRaw } from 'vue'
-import { isNpmMetaLatestValid } from '../../shared/utils'
-import { getBackend } from '../backends'
 import { filters, filtersDefault } from './filters'
 import { settings } from './settings'
+
+export function isNpmMetaLatestValid(meta?: NpmMetaLatest): boolean {
+  if (!meta)
+    return false
+  if (meta.vaildUntil < Date.now())
+    return false
+  return !!meta.publishedAt
+}
 
 export const rawPayload = shallowRef<NodeModulesInspectorPayload | null>(null)
 export const rawReferencePayload = shallowRef<NodeModulesInspectorPayload | null>(null)
@@ -14,7 +20,8 @@ export const rawPublintMessages = ref<Map<string, readonly PublintMessage[] | nu
 
 export async function fetchData(force = false, propagateError = false) {
   rawPayload.value = null
-  const backend = getBackend()
+    /*
+  // const backend = getBackend()
   try {
     const data = await backend.functions.getPayload(force)
 
@@ -73,6 +80,7 @@ export async function fetchData(force = false, propagateError = false) {
       return null
     }
   }
+        */
 }
 
 const _fetchPublintPromise = new Map<string, Promise<PublintMessage[] | null>>()

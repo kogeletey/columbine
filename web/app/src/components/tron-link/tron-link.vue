@@ -5,7 +5,7 @@
     @disconnect="onDisconnect"
   >
     <WalletModalProvider>
-      <WalletActionButton> </WalletActionButton>
+      <WalletActionButton> Connect </WalletActionButton>
     </WalletModalProvider>
   </WalletProvider>
 </template>
@@ -19,17 +19,21 @@ import {
   WalletModalProvider,
   WalletActionButton,
 } from "@tronweb3/tronwallet-adapter-vue-ui";
+import { ProfileStore } from "@/stores/profile.ts";
 import "./tron-link.css";
 
 const tronLink = new TronLinkAdapter();
 const adapters = [tronLink];
 
+const profileStore = new ProfileStore()
+
 function onConnect(address: string) {
-  console.log("[wallet hooks] onConnect: ", address);
+  profileStore.addProfileAddress(address)
+  // console.log("[wallet hooks] onConnect: ", address);
 }
 
 function onDisconnect() {
-  console.log("[wallet hooks] onDisconnect");
+  profileStore.removeProfile()
 }
 </script>
 

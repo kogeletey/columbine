@@ -25,7 +25,6 @@ const nodes = computed(() => {
       return {
         value: c!.bytes,
         name: type.toUpperCase(),
-        class: FILE_CATEGORIES_COLOR_BADGE[type],
         title: `${c?.count} ${type} files, in total ${readable[0]} ${readable[1]}`,
       }
     })

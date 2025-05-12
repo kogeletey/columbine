@@ -385,7 +385,7 @@ onMounted(() => {
         <button
           v-tooltip.left="'Zoom In (Ctrl + =)'"
           :disabled="scale >= ZOOM_MAX"
-          w-10 h-10 rounded-full hover:bg-active op-fade
+          w-10 h-10 rounrded-full hover:bg-active op-fade
           hover:op100 disabled:op20 disabled:bg-none
           disabled:cursor-not-allowed
           flex="~ items-center justify-center"

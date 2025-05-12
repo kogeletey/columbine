@@ -1,58 +1,62 @@
 <script setup lang="ts">
-import { useRoute } from '#app/composables/router'
-import { computed } from 'vue'
+import { useRoute } from "#app/composables/router";
+import { computed } from "vue";
+import { isSidepanelCollapsed } from "../state/ui";
 
-const params = useRoute().params as Record<string, string>
-const selected = computed(() => params.report[0] || 'all')
+import { useContractsStore } from "#imports";
+
+const contractsStore = useContractsStore();
+
+const params = useRoute().params as Record<string, string>;
+const selected = computed(() => params.report[0] || "all");
+
+const state = reactive({
+    getTokenAddress: computed(() => contractsStore.getTokenAddress),
+    tokenInfo: computed(() => contractsStore.getTokenInformation),
+});
+
+onMounted(async () => {
+        await contractsStore.fetchTokenInformation(selected.value);
+});
 </script>
 
 <template>
-  <div flex="~ gap-2 items-center wrap">
-    <NuxtLink btn-action as="button" to="/report/funding" active-class="text-rose bg-rose:5">
-      <div i-ph-heart-duotone />
-      Funding
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/dependencies" active-class="text-primary bg-primary:5">
-      <div i-ph-link-simple-duotone />
-      Dependencies
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/deprecated" active-class="text-red bg-red:5">
-      <div i-ph-warning-duotone />
-      Deprecated
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/multiple-versions" active-class="text-primary bg-primary:5">
-      <div i-ph-copy-duotone />
-      Multiple Versions
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/install-size" active-class="text-primary bg-primary:5">
-      <div i-ph-package-duotone />
-      Install Size
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/time" active-class="text-primary bg-primary:5">
-      <div i-ph-clock-duotone />
-      Publish Time
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/node-engines" active-class="text-primary bg-primary:5">
-      <div i-ph-hexagon-duotone />
-      Node Engines
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report/licenses" active-class="text-primary bg-primary:5">
-      <div i-ph-scales-duotone />
-      Licenses
-    </NuxtLink>
-    <NuxtLink btn-action as="button" to="/report" active-class="text-primary bg-primary:5">
-      <div i-ph-grid-four-duotone />
-      All
-    </NuxtLink>
-  </div>
-
-  <ReportTransitiveDeps v-if="selected === 'dependencies' || selected === 'all'" />
-  <ReportUsedBy v-if="selected === 'dependencies' || selected === 'all'" />
-  <ReportInstallSize v-if="selected === 'install-size' || selected === 'all'" />
-  <ReportPublishTime v-if="selected === 'time' || selected === 'all'" />
-  <ReportDeprecated v-if="selected === 'deprecated' || selected === 'all'" />
-  <ReportEngines v-if="selected === 'node-engines' || selected === 'all'" />
-  <ReportLicenses v-if="selected === 'licenses' || selected === 'all'" />
-  <ReportFunding v-if="selected === 'funding' || selected === 'all'" />
-  <ReportMultipleVersions v-if="selected === 'multiple-versions' || selected === 'all'" />
+    <main transition-all duration-300 :class="[
+        {
+            'transition-none!': $route.meta.noOffset,
+        },
+        'report-page',
+    ]" grid="~ cols-2">
+        <section h-full grid="~ place-items-center">
+                <div>
+                    <picture>
+                        <figure>
+                            <img :src="state.tokenInfo.logo" />
+                        </figure>
+                    </picture>
+                    <h3>
+                        {{ state.tokenInfo?.name }}
+                    </h3>
+                    <a :href="state.tokenInfo.projectPage"> Project Page </a>
+                </div>
+            <div>
+                <span class="report-page__info"> MarketCap: {{ state.tokenInfo.marketCap }} </span>
+                <span class="report-page__info"> Total Liquids: {{ state.tokenInfo.liqudity }} </span>
+                <span class="report-page__info"> Total Supply: {{ state.tokenInfo.totalSupply }} </span>
+            </div>
+        </section>
+        <DisplayTrading :address="state.getTokenAddress" />
+    </main>
 </template>
+
+<style lang="css" scoped>
+.report-page {
+    padding: 10px;
+    padding-top: 100px;
+    min-height: 100vh;
+}
+
+.report-page__info {
+
+}
+</style>
