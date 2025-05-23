@@ -2,6 +2,7 @@ import type { OutputData } from "@editorjs/editorjs"
 
 import EditorJS from "@editorjs/editorjs"
 import DragDrop from "editorjs-drag-drop"
+import { editorDefineConfig } from "./editor.config.ts"
 
 export class EditorJSComponent {
     static tag = "alemufu"
@@ -9,8 +10,11 @@ export class EditorJSComponent {
 
     async getData(): Promise<OutputData | undefined> {
         try {
+            const value = localStorage.getItem("editordata")
             // const value = await storage.getItem("local:editordata")
-            return JSON.parse()
+            if (value) {
+                return JSON.parse(value)
+            }
         }
         catch (error) {
             console.error("Failed to get data", error)
@@ -19,18 +23,21 @@ export class EditorJSComponent {
     }
 
     async initializeEditor() {
-        // const initialData = await this.getData()
+        const initialData = await this.getData()
         this.editor = new EditorJS({
             holder: EditorJSComponent.tag,
+            data: initialData,
             onReady: async () => {
                 return new DragDrop(this.editor)
             },
+            ...editorDefineConfig,
         })
     }
 
     async saveData() {
         try {
             const outputData = await this.editor?.save()
+            localStorage.setItem("editordata", JSON.stringify(outputData))
             // await storage.setItem("local:editordata", JSON.stringify(outputData))
         }
         catch (error) {
@@ -41,8 +48,8 @@ export class EditorJSComponent {
 
     async handleGetDataButtonClick() {
         try {
-            const val = await this.getData()
-            console.log("get-a-data-vl", val)
+            const _ = await this.getData()
+            // console.log("get-a-data-vl", val)
         }
         catch (error) {
             console.error("Failed to fetch data", error)

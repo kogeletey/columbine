@@ -1,7 +1,7 @@
 ---
 import "@/styles/app.css"
 import '@fontsource-variable/jetbrains-mono';
-import "@/components/col-tree/col-tree.ts"
+import { ColTree } from "@/components/col-tree/col-tree.ts"
 ---
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ import "@/components/col-tree/col-tree.ts"
     </head>
   <body>
     <main>
-    <col-tree></col-tree>
+    <ColTree client:load></ColTree>
     <slot />
     </main>
   </body>

@@ -1,17 +1,21 @@
-import type { ColTreeProps } from "./col-tree.d.ts"
 import { html } from "lit"
+import type { ColTreeProps } from './col-tree.d.ts'
 
-export function ColTreeTemplate(props: ColTreeProps[]) {
+export function ColTreeTemplate(props: ColTreeProps) {
     return html`
-<aside>
-  <ul>
-    ${props.map(item => (
+    ${props.files && html`
+        <aside>
+        <ul>
+        ${props.files.map(item => (
         html`
     <li aria-selected="${item.active}">
       <a href="${item.path}"> ${item.name} </a>
     </li>
-    `))}
-  </ul>
-</aside>
+    `))
+            }
+    </ul>
+        </aside>
+        `
+        }
 `
 }

@@ -1,4 +1,5 @@
 @import url("./utils/tailwind.css");
+@import url("./super-input.css");
 
 :root {
   --strong-green: #22c55e;
@@ -11,6 +12,7 @@
   --white: white;
   --primary: var(--hunter-green);
   --grey-10: #f4f4f5;
+  --grey-20: #d6d6d7;
   --secondary: #090b0c;
   --background: var(--white);
   --foreground: var(--black);

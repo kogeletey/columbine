@@ -1,22 +1,44 @@
 ---
 import Base from "@/layouts/base.astro"
-import '@/components/col-nav/col-nav.ts'
+import { ColNav } from '@/components/col-nav/col-nav.ts'
 import TronLink from '@/components/tron-link/tron-link.vue'
+import { SuperInput } from '@/components/super-input/super-input'
 ---
 
 <Base>
+    <!-- <SuperInput client:load /> -->
     <div id="alemufu"></div>
-    <!-- <TronSign client:only="vue" /> -->
-    <col-nav>
+    <ColNav client:load>
         <div slot="account">
         <TronLink client:only="vue" />
         </div>
-    </col-nav>
+    </ColNav>
 </Base>
 
 <style>
 </style>
 
-<script >
+<script>
 import "@/components/editor.ts"
 </script>
+
+<style is:global>
+div#alemufu {
+    margin-top: 1rem;
+}
+
+.ce-header {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+section.geckoterminal {
+    & iframe {
+    width: 100%;
+    height: 60vh;
+    padding: 1.5rem;
+  }
+
+}
+</style>

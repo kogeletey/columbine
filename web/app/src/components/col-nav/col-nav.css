@@ -1,0 +1,37 @@
+:host {
+  --shadow-island:
+    rgba(0, 0, 0, 0.17) 0px 0px 0.931014px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 3.12708px 0px,
+    rgba(0, 0, 0, 0.05) 0px 7px 14px 0px;
+}
+
+nav {
+  position: sticky;
+  top: 10px;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.25rem 0.75rem;
+  box-shadow: var(--shadow-island);
+}
+
+nav button.watch {
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 14px;
+  padding: 0.75em;
+  display: grid;
+  align-content: center;
+  background: transparent;
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+  &:not([disabled]):hover {
+    color: var(--white);
+    background-color: var(--darken);
+  }
+}

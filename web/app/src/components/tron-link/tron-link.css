@@ -3,17 +3,14 @@
   display: inline-flex;
   color: var(--foreground);
   cursor: pointer;
-  height: 48px;
-  background-color: var(--background);
+  background-color: var(--grey-10);
   border: none;
-  border-radius: 4px;
   align-items: center;
-  padding: 0 24px;
-  font-size: 16px;
+  padding: 0.25em;
+  font-size: 14px;
+  gap: 0.75em;
   font-weight: 600;
-  line-height: 48px;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
   white-space: pre;
 }
 .adapter-vue-button:focus {
@@ -23,8 +20,8 @@
   outline: 2px solid white;
 }
 .adapter-vue-button:not([disabled]):hover {
-  color: var(--white);
-  background-color: var(--darken);
+  color: var(--background);
+  background-color: var(--foreground);
 }
 
 .adapter-vue-button[disabled] {
@@ -34,14 +31,13 @@
 }
 
 .adapter-vue-button .button-icon {
-  margin-right: 12px;
 }
 
 .adapter-vue-button .button-icon,
 .adapter-vue-button .button-icon img {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
 }
 
 /* modal */
