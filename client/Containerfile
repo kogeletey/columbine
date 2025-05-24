@@ -1,17 +1,15 @@
-#
 FROM oven/bun:alpine AS build
 
 # Set the working directory
 WORKDIR /app
 
 # Copy package.json and bun.lockb
-COPY ./app-graph/package.json ./app-graph/bun.lock ./
+COPY ./package.json ./bun.lock ./
 
 # Install dependencies
-RUN bun add @vueuse/nuxt && \
-    bun install --frozen-lockfile --ignore-scripts
+RUN bun install --frozen-lockfile --ignore-scripts
 
-COPY ./app-graph .
+COPY . .
 
 RUN bun run build
 
