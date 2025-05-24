@@ -27,5 +27,4 @@ web-ext.config.ts
 *.astro
 
 # data-base
-pgdata/
 .compose-data/

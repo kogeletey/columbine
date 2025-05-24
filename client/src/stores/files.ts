@@ -12,7 +12,7 @@ export class FilesStore {
     addFiles() {
         FilesStore.$files.setKey('files', [{
             id: 0,
-            name: "Smart Contract Name",
+            name: "File 1",
             path: "/",
         }]
         )
