@@ -13,7 +13,7 @@ Using it, create in indexdb storage and put documents there.
 When you open browser, from storage we take data and show
 If user is a some docs, then it should be possible showing it in tree files view, by analogy with
 
-[[./2-file-tree.jpg]]
+[[./file-tree.jpg]]
 
 Two more features, which must be implemented:
 

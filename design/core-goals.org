@@ -1,0 +1,113 @@
+#+TITLE: Core goals of elements
+#+author: Konrad Geletey (matrix:@kglt:re128.org)
+
+* Basic goals
+
+- Support basic format Jupyter Notebook and kernel
+- Support MCP server for search and MCP servers in general
+  - [[https://github.com/spences10/mcp-duckduckgo-search][MCP duckduckgo server]]
+- Support Chrome File System Api for data storage, and its integration with MCP
+  - [[https://developer.chrome.com/docs/capabilities/web-apis/file-system-access][The file system api]]
+- Support document storage in localstorage
+- Specialized editors, for example make the settings a JSON editor
+
+Main setting in a json format:
+
+#+BEGIN_SRC typescript
+
+class SaveTypes {
+    static browser = 'browser'
+    // For chromium* browser - save is a direct, but on Firefox it downloads as an archive
+    static fileSystem = 'file-system'
+}
+
+class PositionElements {
+  static Left = 'Left';
+  static Center = 'Center';
+  static Right = 'Right';
+}
+
+class LocationElements {
+  static Vertical = 'Vertical'
+  static Horizontal = 'Horizontal'
+}
+
+class BufferLayouts {
+    static editor = 'editor'
+    static panel = 'panel'
+    static tree = 'file-tree'
+}
+
+class Sizes {
+    static half = 'half'
+    static split = 'split'
+    static small = 'small'
+    static full = 'full'
+}
+
+export type BlockId = string;
+
+export type OutputBlocksApi<Type, Data> = {
+   id?: BlockId;
+   type: Type;
+   data: Data;
+}
+
+
+export type PinSetup = {
+    location: LocationElements
+    position: PositionElements
+    size: string;
+}
+
+export type LLM = {
+    name: string;
+    url: string;
+    apiKey: string;
+}
+
+type JupyterSetting = {
+  control_port: number;
+  shell_port: number;
+  transport: 'tcp' | 'ipc';
+  signature_scheme: 'hmac-sha256';
+  stdin_port: number;
+  hb_port: number;
+  ip: string;
+  iopub_port: number;
+  key: string;
+}
+
+type MCPServer = {
+  command?: string;
+  args?: string[];
+  transport?: 'sse' | 'ws';
+  url?: string;
+  env?: Record<string, string>;
+}
+
+type FilePath = string;
+
+export type Settings = {
+    // optional one file or separate json files, with a filepath to kernel or mcp
+    kernel?: JupyterSetting | FilePath
+    mcp?: Record<string,MCPServer> | FilePath
+    llms?: LLM[]
+    save: {
+        type: SaveTypes
+        auto?: boolean
+    }
+}
+
+export type Buffer<Data> = {
+    id?: BlockId
+    layout?: BufferLayouts
+    extend?: string;
+    pin?: PinSetup
+    modal?: boolean
+    defaultBlocks?: BlockId[]
+    blocks?: OutputBlocksApi<string,Data>[]
+}
+#+END_SRC
+
+- Support terminal and its commands
