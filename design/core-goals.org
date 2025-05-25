@@ -10,6 +10,7 @@
   - [[https://developer.chrome.com/docs/capabilities/web-apis/file-system-access][The file system api]]
 - Support document storage in localstorage
 - Specialized editors, for example make the settings a JSON editor
+- Support terminal and its commands
 
 Main setting in a json format:
 
@@ -21,28 +22,29 @@ class SaveTypes {
     static fileSystem = 'file-system'
 }
 
-class PositionElements {
-  static Left = 'Left';
-  static Center = 'Center';
-  static Right = 'Right';
-}
-
-class LocationElements {
-  static Vertical = 'Vertical'
-  static Horizontal = 'Horizontal'
-}
-
 class BufferLayouts {
-    static editor = 'editor'
-    static panel = 'panel'
-    static tree = 'file-tree'
+    static editor = '@core/editor'
+    static panel = '@core/panel'
+    static tree = '@core/file-tree'
 }
 
-class Sizes {
-    static half = 'half'
-    static split = 'split'
-    static small = 'small'
-    static full = 'full'
+class BufferAligments = {
+    static left = 'left'
+    static center = 'center'
+    static right = 'right'
+    static justify = 'justify'
+}
+
+class BufferPosition = {
+    static top = 'top'
+    static center = 'center'
+    static bottom = 'bottom'
+    static modal = 'modal'
+}
+
+class BufferOrientation = {
+    static vertical = 'vertical'
+    static horizontal = 'horizontal'
 }
 
 export type BlockId = string;
@@ -51,13 +53,6 @@ export type OutputBlocksApi<Type, Data> = {
    id?: BlockId;
    type: Type;
    data: Data;
-}
-
-
-export type PinSetup = {
-    location: LocationElements
-    position: PositionElements
-    size: string;
 }
 
 export type LLM = {
@@ -93,21 +88,51 @@ export type Settings = {
     kernel?: JupyterSetting | FilePath
     mcp?: Record<string,MCPServer> | FilePath
     llms?: LLM[]
+    layouts?: BufferProperties,
+    imports?: Record<string,string>
+    debug?: boolean;
     save: {
-        type: SaveTypes
         auto?: boolean
     }
 }
 
-export type Buffer<Data> = {
-    id?: BlockId
-    layout?: BufferLayouts
+export type BufferProperty = {
+    id: BlockId
     extend?: string;
-    pin?: PinSetup
-    modal?: boolean
-    defaultBlocks?: BlockId[]
-    blocks?: OutputBlocksApi<string,Data>[]
+    layout: BufferLayouts
+    aligment: BufferAligments
+    position: BufferPosition
+    orientation: BufferOrientation
+    pinBuffers?: BlockId[]
 }
+
+export type BufferProperties = BufferProperty[]
 #+END_SRC
 
-- Support terminal and its commands
+** Default parameters
+
+
+#+BEGIN_SRC typescript
+export const DefaultSettings: Settings = {
+    debug: false,
+    mcp: {
+        "mcp-ddg": {
+            url: "https://se.col.pub/mcp/duckduckgo/sse",
+            transport: "sse"
+        }
+    },
+    model: [{
+        name: 'qwen/qwq-32b:free',
+        url: 'https://openrouter.ai/api/v1/chat/completions',
+        env: {
+            'OPENROUTER_API_KEY': 'env:OPENROUTER_API_KEY'
+        }
+    }],
+    imports: {
+        '@core/': 'col:core'
+    },
+    save: {
+        auto: false
+    }
+}
+#+END_SRC

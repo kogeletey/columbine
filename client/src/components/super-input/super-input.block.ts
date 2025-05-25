@@ -1,66 +1,67 @@
 import type { API } from "@editorjs/editorjs"
 import type {
-  BlockToolConstructorOptions,
+    BlockToolConstructorOptions,
 } from "@editorjs/editorjs/types/tools"
 
 import "@/components/super-input/filter-buttons"
+import "./super-input.css";
 
 export type SuperInputParams = BlockToolConstructorOptions
 
 export class SuperInputBlock {
-  private wrapper: HTMLElement | null
-  private api: API
+    private wrapper: HTMLElement | null
+    private api: API
 
-  constructor({ api }: SuperInputParams) {
-    this.wrapper = null
-    this.api = api
-  }
-
-  static get toolbox() {
-    return {
-      title: "SuperInput",
+    constructor({ api }: SuperInputParams) {
+        this.wrapper = null
+        this.api = api
     }
-  }
 
-  static get isReadOnlySupported() {
-    return true
-  }
-
-  static get enableLineBreaks() {
-    return true
-  }
-
-  getSearch(search: HTMLInputElement | null): void {
-    if (!search) {
-      return
+    static get toolbox() {
+        return {
+            title: "SuperInput",
+        }
     }
-    const value = search.value
-    this.api.blocks.insert("tradingView", { search: value })
-  }
 
-  render() {
-    this.wrapper = document.createElement("fieldset")
-    this.wrapper.classList.add("super")
-
-    const input = document.createElement("input")
-    const filterButtons = document.createElement("filter-buttons")
-
-    this.wrapper.appendChild(input)
-    this.wrapper.appendChild(filterButtons)
-    input.placeholder = "Search smart contract"
-
-    this.wrapper.addEventListener("click", () => {
-      const input = document.querySelector("input")
-      this.getSearch(input)
-    })
-    return this.wrapper
-  }
-
-  save(blockContent) {
-    const input = blockContent.querySelector("input")
-
-    return {
-      search: input.value,
+    static get isReadOnlySupported() {
+        return true
     }
-  }
+
+    static get enableLineBreaks() {
+        return true
+    }
+
+    getSearch(search: HTMLInputElement | null): void {
+        if (!search) {
+            return
+        }
+        const value = search.value
+        this.api.blocks.insert("tradingView", { search: value })
+    }
+
+    render() {
+        this.wrapper = document.createElement("fieldset")
+        this.wrapper.classList.add("super")
+
+        const input = document.createElement("input")
+        const filterButtons = document.createElement("filter-buttons")
+
+        this.wrapper.appendChild(input)
+        this.wrapper.appendChild(filterButtons)
+        input.placeholder = "Search"
+
+        this.wrapper.addEventListener("click", () => {
+            const input = document.querySelector("input")
+            this.getSearch(input)
+        })
+        return this.wrapper
+    }
+
+    save(blockContent) {
+        const input = blockContent.querySelector("input")
+
+        return {
+            search: input.value,
+        }
+    }
 }
