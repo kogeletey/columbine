@@ -1,6 +1,6 @@
 # Columine
 
-Creating a platform for brainly documents. Dream and realize your powerful ideas on the one place.
+Turn your dreams into thriving digital businesses - all in one place. We're creating a platform that brings your ideas to life and helps you monetize them.
 
 ## Tech stack
 
