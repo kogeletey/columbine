@@ -1,16 +1,15 @@
 #+TITLE: Core goals of elements
 #+author: Konrad Geletey (matrix:@kglt:re128.org)
 
-* Basic goals
+* Basic goals, Proxima(2025.06) version
 
-- Support basic format Jupyter Notebook and kernel
+- Integrate models output from openrouter
 - Support MCP server for search and MCP servers in general
   - [[https://github.com/spences10/mcp-duckduckgo-search][MCP duckduckgo server]]
 - Support Chrome File System Api for data storage, and its integration with MCP
   - [[https://developer.chrome.com/docs/capabilities/web-apis/file-system-access][The file system api]]
 - Support document storage in localstorage
 - Specialized editors, for example make the settings a JSON editor
-- Support terminal and its commands
 
 Main setting in a json format:
 
@@ -128,9 +127,6 @@ export const DefaultSettings: Settings = {
             'OPENROUTER_API_KEY': 'env:OPENROUTER_API_KEY'
         }
     }],
-    imports: {
-        '@core/': 'col:core'
-    },
     save: {
         auto: false
     }
