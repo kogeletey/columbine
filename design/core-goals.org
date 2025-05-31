@@ -11,6 +11,7 @@
 - Support document storage in localstorage
 - Specialized editors, for example make the settings a JSON editor
 
+
 Main setting in a json format:
 
 #+BEGIN_SRC typescript
@@ -88,6 +89,7 @@ export type Settings = {
     mcp?: Record<string,MCPServer> | FilePath
     llms?: LLM[]
     layouts?: BufferProperties,
+    // [[https://html.spec.whatwg.org/multipage/webappapis.html#import-map][HTML Standard#Importmap]]
     imports?: Record<string,string>
     debug?: boolean;
     save: {
@@ -132,3 +134,12 @@ export const DefaultSettings: Settings = {
     }
 }
 #+END_SRC
+
+** Advanced Features
+
+- Support basic format Jupyter Notebook and kernel
+    - [[https://docs.jupyter.org/en/latest/#where-do-i-start][Jupyter]]
+    - [[https://jupyterlite.readthedocs.io/en/stable/index.html#contributors][JupyterLite — JupyterLite 0.5.1 documentation]]
+    - [[https://github.com/gzuidhof/starboard-notebook][gzuidhof/starboard-notebook: In-browser literate notebooks]]
+    - [[https://github.com/jupyter/notebook/tree/main?tab=readme-ov-file][jupyter/notebook: Jupyter Interactive Notebook]]
+
