@@ -20,3 +20,8 @@
 body {
   font-family: "JetBrains Mono Variable", monospace;
 }
+
+col-badge {
+  --background-color: var(--primary);
+  --text-color: var(--grey-10);
+}

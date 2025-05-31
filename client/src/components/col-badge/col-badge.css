@@ -1,0 +1,25 @@
+:host {
+  & span.badge {
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius, 2px);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: var(--padding, 0.325rem);
+    max-width: fit-content;
+    gap: 0.625rem;
+  }
+  & button.close-icon {
+    display: grid;
+    align-items: center;
+    appearance: none;
+    border: 0;
+    background: none;
+    padding: 0;
+    margin: 0;
+    & svg {
+      width: var(--width, 16px);
+      height: var(--width, 16px);
+    }
+  }
+}
