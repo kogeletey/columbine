@@ -1,0 +1,31 @@
+---
+import Base from "@/layouts/base.astro"
+// import { ColNav } from '@/components/col-nav/col-nav.ts'
+import ColBadge from "@/components/col-badge/col-badge"
+---
+
+<Base>
+    <!-- <ColNav client:only="lit"></ColNav> -->
+    <ColBadge client:only="lit">
+            Page 1
+        </ColBadge>
+    <!-- <div id="alemufu"></div> -->
+</Base>
+
+<style>
+</style>
+
+<script>
+//import "@/components/editor/editor.ts"
+</script>
+
+<style is:global>
+div#alemufu {
+    margin-top: 1rem;
+}
+
+.ce-header {
+    font-size: 25px;
+    font-weight: bold;
+}
+</style>
