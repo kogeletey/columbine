@@ -1,7 +1,7 @@
 #+TITLE: Core goals of elements
 #+author: Konrad Geletey (matrix:@kglt:re128.org)
 
-* Basic goals, Proxima(2025.06) version
+* Basic goals, Proxima(2025.minor.path) versions
 
 - Integrate models output from openrouter
 - Support MCP server for search and MCP servers in general
@@ -10,7 +10,6 @@
   - [[https://developer.chrome.com/docs/capabilities/web-apis/file-system-access][The file system api]]
 - Support document storage in localstorage
 - Specialized editors, for example make the settings a JSON editor
-
 
 Main setting in a json format:
 
