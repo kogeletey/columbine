@@ -7,14 +7,16 @@
         "@editorjs/editorjs": "^2.30.8",
         "@editorjs/header": "^2.8.8",
         "@fontsource-variable/jetbrains-mono": "^5.1.1",
+        "@langchain/core": "^0.3.57",
+        "@langchain/openai": "^0.5.12",
         "@lit/task": "^1.0.2",
         "@nanostores/lit": "^0.2.2",
         "@semantic-ui/astro-lit": "^5.1.0",
         "astro": "5.8.0",
         "editorjs-drag-drop": "^1.1.16",
+        "langchain": "^0.3.27",
         "lit": "^3.3.0",
         "nanostores": "^1.0.1",
-        "openai": "^5.1.1",
         "rss-to-json": "^2.1.1"
     },
     "devDependencies": {

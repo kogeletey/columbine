@@ -5,24 +5,25 @@ import type {
 } from "@editorjs/editorjs/types/tools"
 
 import "./ask-input.css";
-import  useModelInput  from './use-model-input.ts'
+import { useModelInput } from './use-model-input.ts'
+import type { MessageContentComplex } from "@langchain/core/messages";
 
 export type AskInputParams = BlockToolConstructorOptions
 
 export class AskInputBlock implements BlockTool {
     private _wrapper: HTMLElement | null
-    private _message: string | null
+    private _message: null | string
     private _loader: boolean
     private _api: API
 
-    constructor({api}: BlockToolConstructorOptions) {
+    constructor({ api }: BlockToolConstructorOptions) {
         this._wrapper = null
         this._message = null
         this._loader = false
         this._api = api
     }
 
-    static get toolbox():  ToolboxConfig {
+    static get toolbox(): ToolboxConfig {
         return {
             title: "AskInput",
         }
@@ -39,7 +40,7 @@ export class AskInputBlock implements BlockTool {
     private async modelInputResponse(text: string): Promise<string | null> {
         this._loader = true
         const promptOutput = await useModelInput(text)
-        this._message = promptOutput.content
+        this._message = promptOutput.content as string
         this._loader = false
         return this._message;
     }
@@ -54,17 +55,17 @@ export class AskInputBlock implements BlockTool {
         input.placeholder = "Start thinking about ideas"
 
         this._wrapper.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            if (input.value) {
-                this.modelInputResponse(input.value).then(() => {
-                    this._api.blocks.insert("paragraph", { text: this._message })
-                })
-              }
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                if (input.value) {
+                    this.modelInputResponse(input.value).then(() => {
+                        this._api.blocks.insert("paragraph", { text: this._message })
+                    })
+                }
             }
         })
 
         return this._wrapper
     }
-    public save() {}
+    public save() { }
 }

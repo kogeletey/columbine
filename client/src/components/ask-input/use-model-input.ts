@@ -1,25 +1,18 @@
-import OpenAI from "openai";
+import { ChatOpenAI } from "@langchain/openai";
+import { HumanMessage } from "@langchain/core/messages";
+import type { AIMessageChunk } from "@langchain/core/messages";
 
-
-const model = new OpenAI({
-    baseURL: 'https://openrouter.ai/api/v1',
-    apiKey: import.meta.env.PUBLIC_OPENROUTER_API_KEY,
-    defaultHeaders: {
-    'HTTP-Referer': 'https://localhost',
-    'X-Title': 'Columine',
+const llm = new ChatOpenAI({
+    model: 'deepseek/deepseek-chat-v3-0324:free',
+    configuration: {
+        baseURL: 'https://openrouter.ai/api/v1',
     },
-    dangerouslyAllowBrowser: true
+    apiKey: import.meta.env.PUBLIC_OPENROUTER_API_KEY,
 })
 
-export default async function useModelInput(text: string) {
-    const completion = await model.chat.completions.create({
-    model: 'deepseek/deepseek-chat-v3-0324:free',
-    messages: [
-      {
-        role: 'user',
-        content: text,
-      },
-    ],
-  });
-  return completion.choices[0].message
+export async function useModelInput(text: string): Promise<AIMessageChunk> {
+    const completion = await llm.invoke([
+        new HumanMessage({ content: text }),
+    ]);
+    return completion
 }
