@@ -10,10 +10,17 @@ export default class ColBadge extends LitElement {
     @property({ type: Boolean })
     close: boolean = true
 
+    handleClose() {
+        if (this.close) {
+            this.dispatchEvent(new CustomEvent('close'))
+            this.remove();
+        }
+    }
 
     render() {
         return ColBadgeTemplate({
-            close: this.close
+            close: this.close,
+            handleClose: this.handleClose
         })
     }
 }

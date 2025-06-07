@@ -1,22 +1,22 @@
 ---
 import Base from "@/layouts/base.astro"
-// import { ColNav } from '@/components/col-nav/col-nav.ts'
-import ColBadge from "@/components/col-badge/col-badge"
+// import ColBadge from "@/components/col-badge/col-badge"
 ---
 
 <Base>
-    <!-- <ColNav client:only="lit"></ColNav> -->
-    <ColBadge client:only="lit">
-            Page 1
-        </ColBadge>
-    <!-- <div id="alemufu"></div> -->
+    <!--
+    <ColBadge class="tool" client:only="lit" close={false}>
+            Files
+    </ColBadge>
+    -->
+    <div id="alemufu"></div>
 </Base>
 
 <style>
 </style>
 
 <script>
-//import "@/components/editor/editor.ts"
+import "@/components/editor/editor.ts"
 </script>
 
 <style is:global>

@@ -13,7 +13,9 @@ export default function ColBadgeTemplate(state: ColBadgeState) {
                 <slot></slot>
                 ${state.close ?
             html`
-                <button class="close-icon">
+                <button class="close-icon"
+                @click=${state.handleClose}
+                >
                     ${unsafeSVG(CloseIcon)}
                 </button>
                 ` : undefined}

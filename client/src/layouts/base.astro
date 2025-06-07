@@ -1,6 +1,7 @@
 ---
+import '@/styles/utils/tailwind.css'
 import "@/styles/base-theme.css"
-import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/jetbrains-mono'
 ---
 
 <!DOCTYPE html>
@@ -15,3 +16,10 @@ import '@fontsource-variable/jetbrains-mono';
     <slot />
   </body>
 </html>
+
+<style>
+body {
+  background: var(--background);
+  padding: 0.275rem;
+}
+</style>

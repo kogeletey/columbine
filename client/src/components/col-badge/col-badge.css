@@ -11,6 +11,9 @@
   }
   & button.close-icon {
     display: grid;
+    &:hover {
+      cursor: pointer;
+    }
     align-items: center;
     appearance: none;
     border: 0;
@@ -18,6 +21,7 @@
     padding: 0;
     margin: 0;
     & svg {
+      color: var(--color-close-icon, var(--text-color));
       width: var(--width, 16px);
       height: var(--width, 16px);
     }

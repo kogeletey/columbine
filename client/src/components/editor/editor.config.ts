@@ -1,6 +1,6 @@
 import type { EditorConfig } from "@editorjs/editorjs"
-import { SuperInputBlock } from "@/components/super-input/super-input.block.ts"
 import Header from "@editorjs/header"
+import { AskInputBlock } from "@/components/ask-input/ask-input.block.ts"
 
 export const editorDefineConfig: EditorConfig = {
     autofocus: true,
@@ -9,6 +9,7 @@ export const editorDefineConfig: EditorConfig = {
             class: Header,
             inlineToolbar: true,
         },
-        SuperInputBlock,
+        AskInputBlock
     },
+    defaultBlock: 'AskInputBlock',
 }

@@ -1,0 +1,13 @@
+fieldset.ask-input {
+  border: 0.5px solid;
+  border-color: var(--border-color, var(--grey-15));
+  input, texarea {
+    outline: 0;
+    padding: 0.625rem;
+    width: 100%;
+  }
+  textarea {
+    resize: none;
+    overflow: hidden;
+  }
+}
