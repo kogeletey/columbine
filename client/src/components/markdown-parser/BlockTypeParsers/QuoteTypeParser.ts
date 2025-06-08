@@ -1,5 +1,5 @@
-import { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
-import { Blockquote } from 'mdast'
+import type { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
+import type { Blockquote } from 'mdast'
 
 export function parseQuoteToMarkdown(blocks: BlockToolData) {
   return `> ${blocks.text}\n`

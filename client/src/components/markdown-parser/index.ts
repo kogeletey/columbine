@@ -8,7 +8,7 @@ import { parseCodeToMarkdown, parseMarkdownToCode } from './BlockTypeParsers/Cod
 import { parseMarkdownToQuote, parseQuoteToMarkdown } from './BlockTypeParsers/QuoteTypeParser'
 import { parseImageToMarkdown } from './BlockTypeParsers/ImageTypeParser'
 import { parseCheckboxToMarkdown } from './BlockTypeParsers/CheckboxTypeParser'
-import { OutputBlockData, OutputData } from '@editorjs/editorjs'
+import type { OutputBlockData, OutputData } from '@editorjs/editorjs'
 
 export default class EditorJSMarkdownConverter {
   public static toBlocks(data: string): OutputBlockData[] {

@@ -1,4 +1,4 @@
-import { OutputBlockData } from '@editorjs/editorjs'
+import type { OutputBlockData } from '@editorjs/editorjs'
 
 export function parseDelimiterToMarkdown() {
   const delimiter = '---'

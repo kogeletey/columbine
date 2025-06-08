@@ -7,6 +7,7 @@ import type {
 import "./ask-input.css";
 import { useModelInput } from './use-model-input.ts'
 import type { MessageContentComplex } from "@langchain/core/messages";
+import EditorJSMarkdownConverter from "../markdown-parser/index.ts";
 
 export type AskInputParams = BlockToolConstructorOptions
 
@@ -59,7 +60,14 @@ export class AskInputBlock implements BlockTool {
                 event.preventDefault();
                 if (input.value) {
                     this.modelInputResponse(input.value).then(() => {
-                        this._api.blocks.insert("paragraph", { text: this._message })
+                        // this._api.blocks.insert("paragraph", { text: this._message })
+                        const blocks = EditorJSMarkdownConverter.toBlocks(this._message)
+
+                        blocks.forEach(block => {
+                            console.log('blocks', block.type)
+                            this._api.blocks.insert(block.type, block.data)
+                            }
+                        )
                     })
                 }
             }

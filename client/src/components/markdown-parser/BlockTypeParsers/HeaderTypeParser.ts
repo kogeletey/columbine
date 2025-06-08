@@ -1,5 +1,5 @@
-import { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
-import { Content, Heading } from 'mdast'
+import type { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
+import type { Content, Heading } from 'mdast'
 
 export function headerToMarkdown(blocks: BlockToolData) {
   switch (blocks.level) {

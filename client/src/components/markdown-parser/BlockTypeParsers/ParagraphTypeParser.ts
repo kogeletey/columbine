@@ -1,11 +1,11 @@
-import { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
-import { Paragraph, PhrasingContent } from 'mdast'
+import type { BlockToolData, OutputBlockData } from '@editorjs/editorjs'
+import type { Paragraph, PhrasingContent } from 'mdast'
 
 export function parseParagraphToMarkdown(paragraph: BlockToolData) {
   return `${paragraph.text}\n`
 }
 
-function markdownToText(item: PhrasingContent) {
+function markdownToText(item: any) {
   if (item.type === 'text') return item.value
 
   function processChildren(children: PhrasingContent[]) {
@@ -37,11 +37,13 @@ function markdownToText(item: PhrasingContent) {
   return text
 }
 
-export function parseMarkdownToParagraph(paragraphBlock: Paragraph) {
+type ParagraphWithUnderline = Paragraph & { type: 'underline'}
+
+export function parseMarkdownToParagraph(paragraphBlock: ParagraphWithUnderline) {
   const paragraphs: OutputBlockData[] = []
   let currentParagraph: OutputBlockData | null = null
 
-  paragraphBlock.children.forEach((item) => {
+  paragraphBlock.children.forEach((item: { type: any}) => {
     switch (item.type) {
       case 'text':
       case 'strong':
