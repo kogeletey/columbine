@@ -1,0 +1,12 @@
+* Columine
+Turn your dreams into thriving digital businesses - all in one place. We're creating a platform that brings your ideas to life and helps you monetize them.
+
+** Tech stack
+- [[https://astro.build][Astro]] - platform to rendering application
+- [[https://editorjs.io/][Editor.js]] - WYSIWYG editor as a core
+  - [[https://github.com/ezyostudio/editorjs-markdown-converter][Editorjs Markdown Converter]] - Parser for Markdown and it to prevent it into editorjs blocks
+- [[https://lit.dev][Lit]] - Building web-componenets and ui interfaces simple
+- [[https://github.com/antfu/eslint-config][Eslint]] - Tool and preset which is code has always been perfect
+- [[https://bun.sh][Bun]] - runtime for run any quality of code
+** License
+Use [[AGPL-3.0][LICENSE - AGPL-3.0]]
