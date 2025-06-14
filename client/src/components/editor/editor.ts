@@ -11,7 +11,6 @@ export class EditorJSComponent {
     async getData(): Promise<OutputData | undefined> {
         try {
             const value = localStorage.getItem("editordata")
-            // const value = await storage.getItem("local:editordata")
             if (value) {
                 return JSON.parse(value)
             }
@@ -38,7 +37,6 @@ export class EditorJSComponent {
         try {
             const outputData = await this.editor?.save()
             localStorage.setItem("editordata", JSON.stringify(outputData))
-            // await storage.setItem("local:editordata", JSON.stringify(outputData))
         }
         catch (error) {
             console.error("Error saving data", error)
@@ -49,7 +47,6 @@ export class EditorJSComponent {
     async handleGetDataButtonClick() {
         try {
             const _ = await this.getData()
-            // console.log("get-a-data-vl", val)
         }
         catch (error) {
             console.error("Failed to fetch data", error)
@@ -65,21 +62,8 @@ export class EditorJSComponent {
         }
     }
 
-    attachEventListeners() {
-        const getDataButton = document.querySelector("button.get-data")
-        if (getDataButton) {
-            getDataButton.addEventListener("click", () => this.handleGetDataButtonClick())
-        }
-
-        const saveButton = document.querySelector("button.save-document")
-        if (saveButton) {
-            saveButton.addEventListener("click", () => this.handleSaveButtonClick())
-        }
-    }
-
     async initialize() {
         await this.initializeEditor()
-        // this.attachEventListeners()
     }
 }
 
