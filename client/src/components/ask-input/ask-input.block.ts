@@ -5,28 +5,31 @@ import type {
 } from "@editorjs/editorjs/types/tools"
 
 import "./ask-input.css";
-import { useModelInput } from './use-model-input.ts'
+import { useClientModelInput } from './use-model-input.ts'
 //import type { MessageContentComplex } from "@langchain/core/messages";
 import EditorJSMarkdownConverter from "../markdown-parser/index.ts";
 
 export type AskInputParams = BlockToolConstructorOptions
 
 export class AskInputBlock implements BlockTool {
-    private _wrapper: HTMLElement | null
+    private _element: HTMLElement | null
     private _message: null | string
     private _loader: boolean
+    private _blockIndex: number;
     private _placeholder: string
-    private _api: API
+    api: API
 
     static get DEFAULT_PLACEHOLDER() {
         return "Write a AI Request";
     }
 
     constructor({ api, config }: BlockToolConstructorOptions) {
-        this._wrapper = null
+        this._element = null
         this._message = null
         this._loader = false
-        this._api = api
+        this.api = api
+        this._blockIndex = this.api.blocks.getCurrentBlockIndex()
+        this.onKeyUp = this.onKeyUp.bind(this);
 
         this._placeholder = config.placeholder
             ? config.placeholder
@@ -49,38 +52,75 @@ export class AskInputBlock implements BlockTool {
 
     private async modelInputResponse(text: string): Promise<string | null> {
         this._loader = true
-        const promptOutput = await useModelInput(text)
+        const promptOutput = await useClientModelInput(text)
         this._message = promptOutput.content as string
         this._loader = false
         return this._message;
     }
 
-    public render() {
-        this._wrapper = document.createElement("fieldset")
-        this._wrapper.classList.add("ask-input")
+    onKeyUp(e: KeyboardEvent): void {
+        if (e.code !== 'Backspace' && e.code !== 'Delete') {
+            return;
+        }
+
+        if (!this._element) {
+            return;
+        }
+
+        const { value } = this._element.firstChild as HTMLInputElement;
+
+        if (value === '') {
+            this.api.blocks.delete(this._blockIndex)
+        }
+    }
+
+    static get conversionConfig() {
+        return {
+            import: 'text',
+        };
+    }
+
+    private onKeyDown(e: KeyboardEvent, input: HTMLInputElement): void {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (input.value && !e.shiftKey) {
+                this.modelInputResponse(input.value).then(() => {
+                    const blocks = EditorJSMarkdownConverter.toBlocks(this._message ?? '')
+
+                    blocks.forEach(block => {
+                        this.api.blocks.insert(block.type, block.data)
+                    }
+                    )
+                })
+            }
+            else if (e.shiftKey) {
+                this.api.blocks.insert(undefined, undefined, undefined, this._blockIndex + 1, true)
+            }
+        }
+    }
+
+    public render(): HTMLFieldSetElement {
+        this._element = document.createElement("fieldset")
+        this._element.classList.add("ask-input")
 
         const input = document.createElement("input")
 
-        this._wrapper.appendChild(input)
+        this._element.appendChild(input)
+        input.focus()
         input.placeholder = this._placeholder
 
-        this._wrapper.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                if (input.value) {
-                    this.modelInputResponse(input.value).then(() => {
-                        const blocks = EditorJSMarkdownConverter.toBlocks(this._message ?? '')
+        input.contentEditable = 'true'
 
-                        blocks.forEach(block => {
-                            this._api.blocks.insert(block.type, block.data)
-                        }
-                        )
-                    })
-                }
-            }
-        })
+        this._element.addEventListener("keydown",
+            (event) => this.onKeyDown(event, input)
+        )
 
-        return this._wrapper
+        this._element.addEventListener('keyup', this.onKeyUp)
+
+        return this._element as HTMLFieldSetElement
     }
     public save() { }
+    public destroy() {
+        this._element = null
+    }
 }
