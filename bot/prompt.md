@@ -10,6 +10,6 @@ After that, he can like or dislike, and if the cofounder suits him, leave the pr
 Dislike skips it and picks up the next one.
 Set the metrics - how many likes/dislikes there were. After some time, the bot should remind itself and ask how they communicated.
 Also, collect the time before filling out the profile, and the rest of the results. Write down your ideas too.
-You can store this data in supabase. Write the code below. 
-Adapt this to supbase functions.
+You can store this data in sqlite. Write the code below.
+Adapt this to fastify framework.
 Think step by step.
