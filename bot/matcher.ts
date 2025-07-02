@@ -67,7 +67,5 @@ export async function handleLike(ctx: any) {
 }
 
 export function handleDislike(ctx: any) {
-  // Similar implementation for dislikes
-  // This would update the interactions table
-  // and then show the next profile
+  showNextProfile(ctx)
 }
