@@ -1,18 +1,55 @@
 ---
 import Base from "@/layouts/base.astro"
-// import ColBadge from "@/components/col-badge/col-badge"
+import  WaButton from "@awesome.me/webawesome/dist/components/button/button.js";
+import { ColTree } from "@/components/col-tree/col-tree";
+import en from '@/langs/en.json'
 ---
 
 <Base>
-    <!--
-    <ColBadge class="tool" client:only="lit" close={false}>
-            Files
-    </ColBadge>
-    -->
+    <main>
+    <header>
+        <h1> { en.slogan } </h1>
+    <WaButton
+    appearance="filled" variant="success"
+    size="medium" client:only="lit">Share</WaButton>
+    </header>
+    <ColTree client:only="lit"></ColTree>
     <div id="alemufu"></div>
+    </main>
 </Base>
 
 <style>
+main {
+    display: grid;
+    grid-template-columns: 11% auto;
+    grid-template-areas:
+        'tree header'
+        'tree alemufu'
+        'tree alemufu';
+}
+
+header {
+  grid-area: header;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1rem;
+   max-height: 2rem;
+   margin-top: 0.65rem;
+   & h1 {
+       margin: 0;
+       margin: 0 auto;
+       font-size: 1.2rem;
+   }
+   & wa-button {
+       margin-right: 5rem;
+   }
+}
+
+col-tree {
+    grid-area: tree;
+    --tree-width: auto;
+}
 </style>
 
 <script>
@@ -22,6 +59,7 @@ import "@/components/editor/editor.ts"
 <style is:global>
 div#alemufu {
     margin-top: 1rem;
+    grid-area: alemufu;
 }
 
 .ce-header {

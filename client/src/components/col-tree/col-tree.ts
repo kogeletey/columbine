@@ -1,40 +1,39 @@
-import { useStores } from "@nanostores/lit"
-import { FilesStore, type FilesValue } from "@/stores/files.ts"
-import { LitElement, unsafeCSS } from "lit"
-import { customElement, property } from "lit/decorators.js"
-import colTreeStyles from "./col-tree.css?inline"
-import { ColTreeTemplate } from "./col-tree.html.ts"
+import { useStores } from "@nanostores/lit";
+import { FilesStore, type FilesValue } from "@/stores/files.ts";
+import { LitElement, unsafeCSS } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import colTreeStyles from "./col-tree.css?inline";
+import { ColTreeTemplate } from "./col-tree.html.ts";
 
-const filesStore = new FilesStore()
+const filesStore = new FilesStore();
 
 @customElement("col-tree")
 @useStores(FilesStore.$files)
 export class ColTree extends LitElement {
-    static styles = unsafeCSS(colTreeStyles)
+  static styles = unsafeCSS(colTreeStyles);
 
-    constructor() {
-        super();
-        filesStore.addFiles()
-        this.files = filesStore.getFiles()
-    }
+  constructor() {
+    super();
+    filesStore.addFiles();
+    this.files = filesStore.getFiles();
+  }
 
-    connectedCallback() {
-        super.connectedCallback();
-    }
+  connectedCallback() {
+    super.connectedCallback();
+  }
 
-    @property()
-    files: FilesValue | null = null
+  @property()
+  files: FilesValue | null = null;
 
-    render() {
-        return ColTreeTemplate({
-            files: this.files,
-            active: false
-        })
-    }
+  render() {
+    return ColTreeTemplate({
+      selected: false,
+    });
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        "col-tree": ColTree
-    }
+  interface HTMLElementTagNameMap {
+    "col-tree": ColTree;
+  }
 }

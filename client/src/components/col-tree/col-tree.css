@@ -1,37 +1,30 @@
 aside {
   display: grid;
-  width: 15vw;
+  align-content: start;
+  width: var(--tree-width, 11%);
   min-height: 100vh;
-  font-size: 15px;
-  border-right: 0.5px solid;
-  border-color: var(--shadow);
+  font-size: 14px;
+  gap: 0.65rem;
+  margin-top: var(--margin-top);
+  background-color: var(--wa-color-gray-95);
 }
 
-aside > ul {
-  list-style-type: none;
-  padding-left: 0;
+aside > h3 {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 0.65rem;
+  margin-bottom: 0.05rem;
 }
 
-aside > ul > li {
-  padding: 0.3rem 0.25rem;
-  &:hover {
-    background: var(--grey-10);
-    & a {
-      color: var(--black);
-    }
-  }
+aside > wa-tree {
+  --indent-guide-width: 1px;
 }
 
-aside > ul > li > a {
-  display: grid;
-  padding-left: 1rem;
-  text-decoration: none;
-  color: var(--secondary);
+aside > wa-tree > wa-tree-item::part(item) {
+  border-inline-start: none;
 }
 
-li[aria-selected="true"] {
-  background: var(--primary);
-  & a {
-    color: var(--white);
-  }
+aside > wa-tree > wa-tree-item:state(selected)::part(item) {
+  background-color: var(--wa-color-success-fill-normal);
 }
